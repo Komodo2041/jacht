@@ -6,5 +6,6 @@ use Illuminate\Database\Eloquent\Model;
 
 class Producer extends Model
 {
-    //
+    public $table = "Producer";
+    public $fillable = ["name", "volume"];
 }
