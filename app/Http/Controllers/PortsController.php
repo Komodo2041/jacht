@@ -9,7 +9,7 @@ use App\Models\Ports;
 
 class PortsController extends Controller
 {
-    //
+   
     public function list() {
 
        $ports = Ports::all(); 
