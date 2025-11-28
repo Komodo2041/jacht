@@ -11,6 +11,15 @@ class Notes extends Model
  
     public function producer() {
         return $this->belongsTo("App\Models\Producer");
-    }    
+    }   
+    
+    public function tags() {
+        return $this->belongsToMany(
+                "App\Models\Tags",
+                "App\Models\TagsNotes",
+                'note_id',
+                'tag_id'
+            );
+    }
 
 }

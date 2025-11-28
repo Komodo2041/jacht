@@ -13,10 +13,17 @@
                <span class="sm">{{$note->updated_at}}</span>
                 <span class="tor">
                     <a href="/producer/{{$id}}/notes/edit/{{$note->id}}"><i class="fa-solid fa-pencil"></i></a>
+                    <a href="/producer/{{$id}}/notes/delete/{{$note->id}}" class="delrem"><i class="fa-solid fa-trash-can"></i></a>
                 </span>    
             </p>
             {{$note->body}}
-            <p><span class="sm">Tagi: </span></p>
+            <p>
+               <span class="sm">Tagi: 
+                  @foreach ($note->tags as $tag)
+                     #{{$tag->name}} 
+                  @endforeach
+               </span>
+            </p>
          </div>  
     @empty
         <h3>Brak Dodanych Wpisów</h3>   

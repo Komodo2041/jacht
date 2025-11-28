@@ -14,7 +14,7 @@
         <label>Wpis</label>
         <textarea name="body">{{$note->body}}</textarea>
         <label>Tagi <span class="sm">(podaj po przecinku)</span></label> 
-        <input type="text" name="tags" value="" />        
+        <input type="text" name="tags" value="{{$tags}}" />        
         <input type="hidden" value="1" name="save" />
         <input type="submit" value="Edytuj Wpis" />    
     </form>

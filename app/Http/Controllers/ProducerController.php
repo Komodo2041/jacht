@@ -8,6 +8,8 @@ use Illuminate\Http\Request;
 use App\Models\Producer;
 use App\Models\Models;
 use App\Models\Notes;
+use App\Models\Tags;
+use App\Models\TagsNotes;
 
 class ProducerController extends Controller
 {
@@ -151,7 +153,7 @@ class ProducerController extends Controller
     }
 
     public function notesList($id) {
-       $notes = Notes::where("producer_id", $id)->get(); 
+       $notes = Notes::with('tags')->where("producer_id", $id)->get(); 
        $producer = Producer::find($id);
        return view("producer/notes/list", ["notes" => $notes, "id" => $id, "producer" => $producer]);
     }
@@ -169,6 +171,7 @@ class ProducerController extends Controller
                  "body" => $body,
                  "producer_id" => $id
               ])->id;
+              $this->saveTags($noteId, $tags);
               return redirect("/producer/".$id."/notes")->with('success', 'Wpis został pomyślnie dodany!');
           } else {
              return view("producer/notes/add", ['errors' => implode(", ", $errors)]);
@@ -179,8 +182,14 @@ class ProducerController extends Controller
 
     public function noteEdit($id, $notelid, Request $request) {
         $note = Notes::find($notelid);
+        $uTags = [];
+        $usedTags = Tags::where("type", 1)->join("tags_notes", "tags.id", "tags_notes.tag_id")->where("note_id", $notelid)->get();
+        foreach ($usedTags as $tag) {
+           $uTags[] = $tag->name;
+        }
+    
         $save = $request->input('save');
-        if ($note) { 
+        if ($note) {
            if ($save ) {
                 $body =  trim($request->input('body'));
                 $tags = trim($request->input('tags'));
@@ -188,14 +197,44 @@ class ProducerController extends Controller
                  if (!$errors) { 
                     $note->body = $body;
                     $note->save();
+                    $this->saveTags($notelid, $tags, $uTags);
                     return redirect("/producer/".$id."/notes")->with('success', 'Wpis został pomyślnie edytowany!');
                  } else {
-                    return view("producer/notes/edit", ['note' => $note, 'errors' => implode(", ", $errors)]);
+                    return view("producer/notes/edit", ['note' => $note, 'tags' => implode(", ", $uTags), 'errors' => implode(", ", $errors)]);
                  }
            }  
-           return view("producer/notes/edit", ['note' => $note, 'errors' => ""]);
+           return view("producer/notes/edit", ['note' => $note, 'tags' => implode(", ", $uTags), 'errors' => ""]);
         } 
         return redirect("/producer/".$id."notes")->with('error', 'Nie znaleziono wpisu');        
+    }
+
+    private function saveTags($id, $tags, $used = []) {
+ 
+       $allTags = Tags::where("type", 1)->get(); 
+       $tags = explode(",", $tags); 
+       foreach ($tags AS $tag) {
+          $tag = ucfirst(trim($tag));
+          if ($tag != "" && !in_array($tag, $used))  {
+            if ($tid = $allTags->where('name', $tag)->first()?->id) {
+                TagsNotes::create([
+                    "tag_id" => $tid,
+                    "note_id" => $id
+                ]);
+            } else {
+                $tagId = Tags::create([
+                    "type" => 1,
+                    "name" => $tag
+                ])->id;
+
+                TagsNotes::create([
+                    "tag_id" => $tagId,
+                    "note_id" => $id
+                ]);
+
+            }
+        }
+       }
+   
     }
 
     private function validNotes($body) {
@@ -206,4 +245,13 @@ class ProducerController extends Controller
         return $errors;
     }
 
+    public function noteDelete($id, $nodeId) {
+        $note = Notes::find($nodeId);
+        if ($note) {
+            $note->delete();
+            TagsNotes::where("note_id", $nodeId)->delete();
+            return redirect("/producer/".$id."/notes")->with('success', 'Wpis został usunięty');
+        } 
+        return redirect("/producer/".$id."/notes")->with('error', 'Nie znaleziono wpsiu');       
+    }
 }
