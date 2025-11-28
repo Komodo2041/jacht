@@ -13,11 +13,26 @@
   <!-- Nadpisanie kolorów – ZAWSZE PO Pico! -->
  
      <link rel="stylesheet"  href="{{URL::asset('css/style.css')}}" />
-     
+   
 </head>
 <body>
     <div class="container" >
+
+    @if (session('success'))
+        <div  class="success">
+            {{ session('success') }}
+        </div>
+    @endif
+    @if (session('error'))
+        <div  class="error">
+            {{ session('error') }}
+        </div>
+    @endif
+
          @yield("content")
-    </div>    
-</body>     
+    </div>   
+     <script src="{{URL::asset('js/main.js')}}" ></script>
+      
+</body>
+   
 </html>

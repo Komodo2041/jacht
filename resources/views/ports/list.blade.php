@@ -29,7 +29,7 @@
         <td>{{$port->name}}</td> 
         <td> 
             <a href="/ports/edit/{{$port->id}}"><i class="fa-solid fa-pencil"></i></a>
-            <a href="/ports/delete/{{$port->id}}"><i class="fa-solid fa-trash-can"></i></a>
+            <a href="/ports/delete/{{$port->id}}" class="delrem"><i class="fa-solid fa-trash-can"></i></a>
         </td> 
     </tr> 
     @empty

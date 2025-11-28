@@ -16,3 +16,8 @@ Route::get('/producer', "App\Http\Controllers\ProducerController@list" );
 Route::match(["get", "post"], '/producer/add', "App\Http\Controllers\ProducerController@add" );
 Route::match(["get", "post"], '/producer/edit/{id}', "App\Http\Controllers\ProducerController@edit" );
 Route::get('/producer/delete/{id}', "App\Http\Controllers\ProducerController@delete" );
+
+Route::get('/producer/{id}/models', "App\Http\Controllers\ProducerController@modelList" );
+Route::match(["get", "post"], '/producer/{id}/models/add', "App\Http\Controllers\ProducerController@modelAdd" );
+Route::match(["get", "post"], '/producer/{id}/models/edit/{modelid}', "App\Http\Controllers\ProducerController@modelEdit" );
+Route::get('/producer/{id}/models/delete/{modelid}', "App\Http\Controllers\ProducerController@modelDelete" );
