@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 
 use App\Models\Producer;
 use App\Models\Models;
+use App\Models\Notes;
 
 class ProducerController extends Controller
 {
@@ -128,8 +129,7 @@ class ProducerController extends Controller
         } 
         return redirect("/producer/".$id."/models")->with('error', 'Nie znaleziono modelu');        
     }
-
-
+ 
     private function validModel($name, $body) {
         $errors = [];
         if (!$name) {
@@ -148,6 +148,62 @@ class ProducerController extends Controller
             return redirect("/producer/".$id."/models")->with('success', 'Model został usunięty');
         } 
         return redirect("/producer/".$id."/models")->with('error', 'Nie znaleziono modelu');       
+    }
+
+    public function notesList($id) {
+       $notes = Notes::where("producer_id", $id)->get(); 
+       $producer = Producer::find($id);
+       return view("producer/notes/list", ["notes" => $notes, "id" => $id, "producer" => $producer]);
+    }
+
+    public function noteAdd(Request $request, $id) {
+       $save =  $request->input('save');
+       $body = ""; 
+       $tags = ""; 
+       if ($save) {
+          $body =  trim($request->input('body'));
+          $tags = trim($request->input('tags'));
+          $errors = $this->validNotes($body);
+          if (!$errors) {
+              $noteId = Notes::create([
+                 "body" => $body,
+                 "producer_id" => $id
+              ])->id;
+              return redirect("/producer/".$id."/notes")->with('success', 'Wpis został pomyślnie dodany!');
+          } else {
+             return view("producer/notes/add", ['errors' => implode(", ", $errors)]);
+          }
+       }
+       return view("producer/notes/add", ['errors' => '']);
+    }
+
+    public function noteEdit($id, $notelid, Request $request) {
+        $note = Notes::find($notelid);
+        $save = $request->input('save');
+        if ($note) { 
+           if ($save ) {
+                $body =  trim($request->input('body'));
+                $tags = trim($request->input('tags'));
+                $errors = $this->validNotes($body);
+                 if (!$errors) { 
+                    $note->body = $body;
+                    $note->save();
+                    return redirect("/producer/".$id."/notes")->with('success', 'Wpis został pomyślnie edytowany!');
+                 } else {
+                    return view("producer/notes/edit", ['note' => $note, 'errors' => implode(", ", $errors)]);
+                 }
+           }  
+           return view("producer/notes/edit", ['note' => $note, 'errors' => ""]);
+        } 
+        return redirect("/producer/".$id."notes")->with('error', 'Nie znaleziono wpisu');        
+    }
+
+    private function validNotes($body) {
+        $errors = [];
+        if (!$body) {
+            $errors[] = "Podaj wpis";
+        }        
+        return $errors;
     }
 
 }

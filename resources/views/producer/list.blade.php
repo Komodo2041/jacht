@@ -37,6 +37,8 @@
             @endforelse
         </td>
         <td> 
+ 
+            <a href="/producer/{{$p->id}}/notes" title="notes"><i class="fa-solid fa-layer-group"></i></a>
             <a href="/producer/{{$p->id}}/models" title="models"><i class="fa-solid fa-list"></i></a>
             <a href="/producer/edit/{{$p->id}}"><i class="fa-solid fa-pencil"></i></a>
             <a href="/producer/delete/{{$p->id}}" class="delrem"><i class="fa-solid fa-trash-can"></i></a>

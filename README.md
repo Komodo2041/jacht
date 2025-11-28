@@ -4,8 +4,8 @@
 
  Obecny stan : 
  
- CRUD ports,
- CRUD producentów
- ----CRUD modeli
- ----CRUD informacji nt producentów
- --------TAGI -> Do filtrowania informacji*
+ CRUD ports,  
+ CRUD producentów  
+ ----CRUD modeli  
+ ----CRUD informacji nt producentów  
+ --------TAGI -> Do filtrowania informacji*  

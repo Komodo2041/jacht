@@ -24,3 +24,18 @@ body {
     border-radius: 0.25rem;
     margin: 1rem 0;
 }
+
+.sm {
+    font-size: 10px;
+}
+
+.boxes {
+    background: #eeaaee;
+    padding: 5px;
+    border-radius: 10px;
+    margin: 15px 0px;
+}
+
+.tor {
+    float: right;
+}
