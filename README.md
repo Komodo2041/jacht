@@ -2,10 +2,13 @@
  obsłudze firmy zajmującej się podróżami jachtami dla turystów
  Duże moduły: Statki, Kursy, Załoga, miejsca na statku
 
+Na froncie postanowiłem użyć pico.css  
+
  Obecny stan : 
  
  CRUD ports,  
  CRUD producentów  
  ----CRUD modeli  
  ----CRUD informacji nt producentów  
- --------TAGI -> Do filtrowania informacji*  
+ --------PIVOT informacji nt producentów na tabelę tagów         
+ --------TAGI -> Do filtrowania informacji użyta w różnych miejcach
