@@ -30,11 +30,11 @@
     @endif
  
         <div class="grid-1-5">
-            <div id="menu">
+            <div id="menu" class="no-bullets" >
                 
-                <details name="menu1"  >
+                <details name="menu1">
                 <summary>Organizacja</summary>
-                   <ul>
+                   <ul  >
                      <li>
                         <a href="/departments">Departamenty</a>
                      </li>
@@ -43,17 +43,31 @@
                      </li>  
                    </ul>
                 </details>
-                <details name="menu2"  >
+                <details name="menu2">
                 <summary>Rejsy</summary>
-                   <ul>
+                   <ul  >
                      <li>
                         <a href="/ports">Porty</a>
                      </li> 
                    </ul>
-                </details>                
-                <details name="menu3"  >
+                </details>          
+                <details name="menu3">
+                <summary>Statki</summary>
+                   <ul >
+                     <li>
+                        <a href="/producer">Typy</a>
+                     </li>
+                     <li>
+                        <a href="/producer">Kategorie podzespołów</a>
+                     </li>
+                     <li>
+                        <a href="/producer">Podzespoły</a>
+                     </li>  
+                   </ul>
+                </details>
+                <details name="menu4">
                 <summary>Producenci statków</summary>
-                   <ul>
+                   <ul >
                      <li>
                         <a href="/producer">Producenci</a>
                      </li>                      

@@ -54,3 +54,20 @@ body {
     /* lewa 5 części, prawa 1 część */
     gap: var(--pico-spacing-4);
 }
+
+.no-bullets,
+.no-bullets ul,
+.no-bullets ul li {
+    list-style: none;
+
+}
+
+#content {
+    padding: 30px;
+    background: #e8e0f0;
+}
+
+#menu {
+    padding: 10px;
+    background: #f0e0e0;
+}
