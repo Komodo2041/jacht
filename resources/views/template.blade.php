@@ -28,8 +28,47 @@
             {{ session('error') }}
         </div>
     @endif
+ 
+        <div class="grid-1-5">
+            <div id="menu">
+                
+                <details name="menu1"  >
+                <summary>Organizacja</summary>
+                   <ul>
+                     <li>
+                        <a href="/departments">Departamenty</a>
+                     </li>
+                     <li>
+                        <a href="/jobs">Stanowiska</a>
+                     </li>  
+                   </ul>
+                </details>
+                <details name="menu2"  >
+                <summary>Rejsy</summary>
+                   <ul>
+                     <li>
+                        <a href="/ports">Porty</a>
+                     </li> 
+                   </ul>
+                </details>                
+                <details name="menu3"  >
+                <summary>Producenci statków</summary>
+                   <ul>
+                     <li>
+                        <a href="/producer">Producenci</a>
+                     </li>                      
+                   </ul>
+                </details>
+                <hr />
 
-         @yield("content")
+            </div>    
+            <div id="content">
+              @yield("content")
+            </div>  
+        </div>    
+  
+ 
+    
     </div>   
      <script src="{{URL::asset('js/main.js')}}" ></script>
       

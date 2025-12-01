@@ -3,9 +3,7 @@
 use Illuminate\Support\Facades\Route;
  
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', "App\Http\Controllers\MainController@apge" );
 
 Route::get('/ports', "App\Http\Controllers\PortsController@list" );
 Route::match(["get", "post"], '/ports/add', "App\Http\Controllers\PortsController@add" );

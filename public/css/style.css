@@ -39,3 +39,18 @@ body {
 .tor {
     float: right;
 }
+
+.grid-1-5 {
+    display: grid;
+    grid-template-columns: 1fr 5fr;
+    /* lewa 1 część, prawa 5 części */
+    gap: var(--pico-spacing-4);
+    /* odstęp taki jak w zwykłym .grid */
+}
+
+.grid-5-1 {
+    display: grid;
+    grid-template-columns: 5fr 1fr;
+    /* lewa 5 części, prawa 1 część */
+    gap: var(--pico-spacing-4);
+}
