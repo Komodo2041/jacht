@@ -8,4 +8,5 @@ class Departments extends Model
 {
     //
     public $fillable = ["name"];
+    public $table = "departments";
 }

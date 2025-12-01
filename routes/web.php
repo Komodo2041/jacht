@@ -25,3 +25,8 @@ Route::get('/producer/{id}/notes', "App\Http\Controllers\ProducerController@note
 Route::match(["get", "post"], '/producer/{id}/notes/add', "App\Http\Controllers\ProducerController@noteAdd" );
 Route::match(["get", "post"], '/producer/{id}/notes/edit/{noteid}', "App\Http\Controllers\ProducerController@noteEdit" );
 Route::get('/producer/{id}/notes/delete/{noteid}', "App\Http\Controllers\ProducerController@noteDelete" );
+
+Route::get('/departments', "App\Http\Controllers\DepartmentController@list" );
+Route::match(["get", "post"], '/departments/add', "App\Http\Controllers\DepartmentController@add" );
+Route::match(["get", "post"], '/departments/edit/{id}', "App\Http\Controllers\DepartmentController@edit" );
+Route::get('/departments/delete/{id}', "App\Http\Controllers\DepartmentController@delete" );
