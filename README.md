@@ -11,4 +11,7 @@ Na froncie postanowiłem użyć pico.css
  ----CRUD modeli  
  ----CRUD informacji nt producentów  
  --------PIVOT informacji nt producentów na tabelę tagów         
- --------TAGI -> Do filtrowania informacji użyta w różnych miejcach
+ --------TAGI -> Do filtrowania informacji użyta w różnych miejcach  
+ CRUD departamentów  
+ ----CRUD stanowisk  
+

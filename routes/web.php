@@ -30,3 +30,8 @@ Route::get('/departments', "App\Http\Controllers\DepartmentController@list" );
 Route::match(["get", "post"], '/departments/add', "App\Http\Controllers\DepartmentController@add" );
 Route::match(["get", "post"], '/departments/edit/{id}', "App\Http\Controllers\DepartmentController@edit" );
 Route::get('/departments/delete/{id}', "App\Http\Controllers\DepartmentController@delete" );
+
+Route::get('/jobs', "App\Http\Controllers\JobController@list" );
+Route::match(["get", "post"], '/jobs/add', "App\Http\Controllers\JobController@add" );
+Route::match(["get", "post"], '/jobs/edit/{id}', "App\Http\Controllers\JobController@edit" );
+Route::get('/jobs/delete/{id}', "App\Http\Controllers\JobController@delete" );

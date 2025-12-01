@@ -8,17 +8,22 @@
     </div> 
 @endif
 
-@if ($port)
+@if ($job)
     <form action="" method="Post">
         @csrf
-        <label>Nazwa Portu</label>
-        <input type="text" name="name" placeholder="Nazwa" value="{{$port->name}}" >
+        <label>Nazwa Stanowiska</label>
+        <input type="text" name="name" placeholder="Nazwa" value="{{$job->name}}" >
         <input type="hidden" value="1" name="save" />
-        <input type="submit" value="Edytuj port" />    
+        <label>Departament</label>
+        <select name="dept" >
+        @foreach ($depts as $dept)
+            <option value="{{$dept->id}}" @if ($dept->id == $job->dept_id) selected @endif>{{$dept->name}}</option>
+        @endforeach        
+        <input type="submit" value="Edytuj stanowisko" />
     </form>
 @else
     <div class="error">
-        Nie znaleziono portu
+        Nie znaleziono stanowiska
     </div> 
 @endif
 
