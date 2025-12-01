@@ -1,16 +1,6 @@
 @extends('template')
 @section('content')
-    
-    @if (session('success'))
-        <div  class="success">
-            {{ session('success') }}
-        </div>
-    @endif
-    @if (session('error'))
-        <div  class="error">
-            {{ session('error') }}
-        </div>
-    @endif
+ 
 
    <h2>Producenci</h2>
    <a href="/producer/add" class="secondary">Dodaj nowego producenta</a>

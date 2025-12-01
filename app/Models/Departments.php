@@ -4,8 +4,8 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Tags extends Model
+class Departments extends Model
 {
-    public $fillable = ["type", "name"];
-
+    //
+    public $fillable = ["name"];
 }

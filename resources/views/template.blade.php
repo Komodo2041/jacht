@@ -18,7 +18,7 @@
 <body>
     <div class="container" >
 
-    @if (session('success'))
+     @if (session('success'))
         <div  class="success">
             {{ session('success') }}
         </div>
