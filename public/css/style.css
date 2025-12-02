@@ -71,3 +71,13 @@ body {
     padding: 10px;
     background: #f0e0e0;
 }
+
+.info div {
+    background: #f0e0e0;
+    font-size: 18px;
+}
+
+.info label {
+    margin-top: 20px;
+    font-weight: bold;
+}

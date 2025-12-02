@@ -55,7 +55,7 @@
                 <summary>Statki</summary>
                    <ul >
                      <li>
-                        <a href="/producer">Typy</a>
+                        <a href="/types">Typy</a>
                      </li>
                      <li>
                         <a href="/producer">Kategorie podzespołów</a>
