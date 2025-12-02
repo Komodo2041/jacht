@@ -61,7 +61,7 @@
                         <a href="/categories">Kategorie podzespołów</a>
                      </li>
                      <li>
-                        <a href="/producer">Podzespoły</a>
+                        <a href="/equipments">Podzespoły</a>
                      </li>  
                    </ul>
                 </details>

@@ -44,3 +44,7 @@ Route::get('/categories', "App\Http\Controllers\EquipmentCategoryController@list
 Route::match(["get", "post"], '/categories/add', "App\Http\Controllers\EquipmentCategoryController@add" );
 Route::match(["get", "post"], '/categories/edit/{id}', "App\Http\Controllers\EquipmentCategoryController@edit" );
 Route::get('/categories/delete/{id}', "App\Http\Controllers\EquipmentCategoryController@delete" );
+Route::get('/equipments', "App\Http\Controllers\EquipmentController@list" );
+Route::match(["get", "post"], '/equipments/add', "App\Http\Controllers\EquipmentController@add" );
+Route::match(["get", "post"], '/equipments/edit/{id}', "App\Http\Controllers\EquipmentController@edit" );
+Route::get('/equipments/delete/{id}', "App\Http\Controllers\EquipmentController@delete" );
