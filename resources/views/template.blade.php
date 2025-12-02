@@ -55,6 +55,9 @@
                 <summary>Statki</summary>
                    <ul >
                      <li>
+                        <a href="/yachts">Statki</a>
+                     </li>
+                     <li>
                         <a href="/types">Typy</a>
                      </li>
                      <li>
