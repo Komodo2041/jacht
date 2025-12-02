@@ -39,3 +39,8 @@ Route::match(["get", "post"], '/types/add', "App\Http\Controllers\TypesControlle
 Route::match(["get", "post"], '/types/edit/{id}', "App\Http\Controllers\TypesController@edit" );
 Route::get('/types/delete/{id}', "App\Http\Controllers\TypesController@delete" );
 Route::get( '/types/show/{id}', "App\Http\Controllers\TypesController@show" );
+
+Route::get('/categories', "App\Http\Controllers\TypesController@list" );
+Route::match(["get", "post"], '/categories/add', "App\Http\Controllers\TypesController@add" );
+Route::match(["get", "post"], '/categories/edit/{id}', "App\Http\Controllers\TypesController@edit" );
+Route::get('/categories/delete/{id}', "App\Http\Controllers\TypesController@delete" );
