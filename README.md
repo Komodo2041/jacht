@@ -14,5 +14,6 @@ Na froncie postanowiłem użyć pico.css
  --------TAGI -> Do filtrowania informacji użyta w różnych miejcach  
  CRUD departamentów  
  ----CRUD stanowisk  
-CRUD typ statków 
+ CRUD kategorie wyposażenia 
+ ----CRUD wyposażenie
 

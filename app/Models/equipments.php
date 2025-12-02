@@ -4,7 +4,9 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class equipments extends Model
+class Equipments extends Model
 {
-    //
+    public function category() {
+        return $this->belongTo("App\Models\Equipment_category", "category_id" );
+    }
 }

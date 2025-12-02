@@ -58,7 +58,7 @@
                         <a href="/types">Typy</a>
                      </li>
                      <li>
-                        <a href="/producer">Kategorie podzespołów</a>
+                        <a href="/categories">Kategorie podzespołów</a>
                      </li>
                      <li>
                         <a href="/producer">Podzespoły</a>
