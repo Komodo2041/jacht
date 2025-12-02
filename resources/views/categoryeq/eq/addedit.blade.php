@@ -23,6 +23,7 @@
     @foreach ($category as $cat)
         <option value="{{$cat->id}}" @if ($cat->id == $eq->category_id) selected @endif>{{$cat->name}}</option>
     @endforeach    
+</select>
 
      <input type="hidden" value="1" name="save" />
      @if (isset($isedit) && $isedit)

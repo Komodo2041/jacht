@@ -6,6 +6,18 @@
    <h2>Wyposażenie</h2>
    <a href="/equipments/add" class="secondary">Dodaj nowe wyposażenie</a>
 
+  <div>
+     <form action="" method="GET">
+    <select name="category_id" >
+        <option value="0">-</option> 
+    @foreach ($category as $cat)
+        <option value="{{$cat->id}}" @if ($cat->id == $catid) selected @endif>{{$cat->name}}</option>
+    @endforeach    
+</select>      
+      <input type="submit" value="Filtruj" />
+</form>
+</div>  
+
   <table>
     <thead>
           <tr>

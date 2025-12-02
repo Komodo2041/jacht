@@ -12,9 +12,16 @@ use App\Models\Equipments;
 class EquipmentController extends Controller
 {
  
-    public function list() {
-       $eqs = Equipments::with("category")->get();
-       return view("categoryeq/eq/list", ["eqs" => $eqs]);
+    public function list(Request $request) {
+       $cats = Category::all();
+       $catId = (int) trim($request->input('category_id'));
+        
+       if ($catId) {
+           $eqs = Equipments::with("category")->where('category_id', $catId)->get();
+       } else {
+           $eqs = Equipments::with("category")->get();
+       } 
+       return view("categoryeq/eq/list", ["eqs" => $eqs, 'category' => $cats, 'catid' => $catId]);
     }
 
     public function add(Request $request) {
