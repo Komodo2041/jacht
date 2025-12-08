@@ -15,7 +15,6 @@ class YachtsController extends Controller
 {
     public function list() {
  
-      // $yachts = Yachts::with(["models", "producers"])->get(); 
        $yachts = Yachts::with(["models"])->get();
        return view("yachts/list", ["yachts" => $yachts]);
     }
@@ -98,6 +97,16 @@ class YachtsController extends Controller
 
     private function getErrors($errors) {
         return implode(", ", $errors->all());
+    }
+
+    public function show($id) {
+       $yacht = Yachts::find($id); 
+     
+       if ($yacht) {
+            return view("yachts/show", ['yacht' => $yacht ]);
+       }
+       
+       
     }
 
     public function delete($id) {

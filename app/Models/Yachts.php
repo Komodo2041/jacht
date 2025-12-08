@@ -24,11 +24,11 @@ class Yachts extends Model
     ]; 
 
     public function models() {
-        return $this->belongsTo(Models::class);
+        return $this->belongsTo(Models::class, "model_id");
     }
 
      public function producers() {
-        return $this->belongsTo("App\Models\Producer");
+        return $this->belongsTo("App\Models\Producer", "producer_id");
     }   
 }
 

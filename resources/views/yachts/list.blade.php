@@ -25,6 +25,7 @@
         <td>{{$yacht->model}}</td> 
         <td>{{$yacht->cabins}}</td>  
         <td> 
+           <a href="/yachts/show/{{$yacht->id}}"><i class="fa-solid fa-bars"></i></a>
             <a href="/yachts/edit/{{$yacht->id}}"><i class="fa-solid fa-pencil"></i></a>
             <a href="/yachts/delete/{{$yacht->id}}" class="delrem"><i class="fa-solid fa-trash-can"></i></a>
         </td> 
