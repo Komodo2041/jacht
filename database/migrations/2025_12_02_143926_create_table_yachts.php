@@ -17,7 +17,7 @@ return new class extends Migration
             $table->string('producer_id')->nullable(); 
 
 
-            $table->string('model'); // Model (np. Bavaria 46)
+            $table->string('model')->nullable(); // Model (np. Bavaria 46)
             // Cechy podstawowe:
             $table->string('engine_brand')->nullable(); // Marka silnika (Yanmar, Volvo)
             $table->string('engine_model')->nullable(); // Model (4JH57)
