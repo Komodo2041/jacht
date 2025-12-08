@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use App\Models\Yachts;
 use App\Models\Producer;
 use App\Models\Models;
+use App\Models\Types;
 
 use Illuminate\Support\Facades\Validator;
 
@@ -15,7 +16,7 @@ class YachtsController extends Controller
 {
     public function list() {
  
-       $yachts = Yachts::with(["models"])->get();
+       $yachts = Yachts::with(["models", "type"])->get();
        return view("yachts/list", ["yachts" => $yachts]);
     }
 
@@ -23,6 +24,7 @@ class YachtsController extends Controller
        $save =  $request->input('save');
        $producer = Producer::with("models")->get();
        $yacht = new Yachts();
+       $types = Types::all();
 
        if ($save) {
 
@@ -40,26 +42,28 @@ class YachtsController extends Controller
             'propeller_type' => 'required|in:fixed,folding',
             'engine_brand' => 'nullable|string|max:200',
             'engine_model' => 'nullable|string|max:200',
-            'model' => 'nullable|string|max:200'
+            'model' => 'nullable|string|max:200',
+            'type_id' => 'required|integer'
         ]);
 
         if ($validator->fails()) {
             $yacht = new Yachts($request->all()); 
-            return view("yachts/addedit", ['errors' => $this->getErrors($validator->errors()), "producer" => $producer, 'yacht' => $yacht]);
+            return view("yachts/addedit", ['errors' => $this->getErrors($validator->errors()), "producer" => $producer, 'yacht' => $yacht, 'types' => $types]);
         } else {
             Yachts::create($request->all());
             return redirect("yachts")->with('success', 'Statek został dodany pomyślnie!');
         }
  
        }
-       return view("yachts/addedit", ['errors' => '', "producer" => $producer, 'yacht' => $yacht]);
+       return view("yachts/addedit", ['errors' => '', "producer" => $producer, 'yacht' => $yacht, 'types' => $types]);
     }
 
    public function edit($id, Request $request) {
         $yacht = Yachts::find($id);
         $save =  $request->input('save');
         $producer = Producer::with("models")->get();
-      
+        $types = Types::all();
+
         if ($yacht) { 
            if ($save) {
  
@@ -77,7 +81,8 @@ class YachtsController extends Controller
                     'propeller_type' => 'required|in:fixed,folding',
                     'engine_brand' => 'nullable|string|max:200',
                     'engine_model' => 'nullable|string|max:200',
-                    'model' => 'nullable|string|max:200'
+                    'model' => 'nullable|string|max:200',
+                    'type_id' => 'required|integer'
                 ]);     
 
                  if (!$validator->fails()) {
@@ -86,10 +91,10 @@ class YachtsController extends Controller
                     return redirect("yachts")->with('success', 'Statek został pomyślnie edytowany!');
                  } else {
                     $yacht = new Yachts($request->all()); 
-                    return view("yachts/addedit", ['errors' => $this->getErrors($validator->errors()), "producer" => $producer, 'yacht' => $yacht, 'isedit' => true]);
+                    return view("yachts/addedit", ['errors' => $this->getErrors($validator->errors()), "producer" => $producer, 'yacht' => $yacht, 'isedit' => true, 'types' => $types]);
                  }
            }  
-           return view("yachts/addedit", ['errors' => '', "producer" => $producer, 'yacht' => $yacht, 'isedit' => true]);
+           return view("yachts/addedit", ['errors' => '', "producer" => $producer, 'yacht' => $yacht, 'isedit' => true, 'types' => $types]);
         } 
         return redirect("yachts")->with('error', 'Nie znaleziono statku');        
     }
@@ -101,12 +106,9 @@ class YachtsController extends Controller
 
     public function show($id) {
        $yacht = Yachts::find($id); 
-     
        if ($yacht) {
             return view("yachts/show", ['yacht' => $yacht ]);
        }
-       
-       
     }
 
     public function delete($id) {

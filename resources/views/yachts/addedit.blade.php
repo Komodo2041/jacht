@@ -19,10 +19,25 @@
      <label>Długośc statku w metrach</label>
      <input type="number" name="length_meters" min="0" value="{{$yacht->length_meters}}"  /> 
  
+    <label>Typ statku</label>
+    <select name="type_id" >
+          <option value="">-</option>
+            @foreach ($types as $type)
+                <option value="{{$type->id}}"  
+                {{ $type->id == $yacht?->type_id ? 'selected' : '' }}>
+                {{$type->name}}</option>
+            @endforeach
+    </select> 
+
+
     <label>Typ śruby</label> 
     <select name="propeller_type">
-        <option value="fixed">Stały</option>
-        <option value="folding">Składany</option>
+        <option value="fixed" 
+       {{ $yacht->propeller_type == "fixed" ? 'selected' : '' }}
+        >Stały</option>
+        <option value="folding"
+         {{ $yacht->propeller_type == "folding" ? 'selected' : '' }}
+        >Składany</option>
     </select>    
  
     <label>Producent</label> 

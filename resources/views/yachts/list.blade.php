@@ -12,7 +12,7 @@
           <tr>
             <th scope="col">Nazwa</th>
             <th scope="col">Rok Budowy</th>
-            <th scope="col">Model</th> 
+            <th scope="col">Typ</th> 
             <th scope="col">Liczba Kabin</th>
             <th></th>
           </tr>
@@ -22,7 +22,7 @@
     <tr>
         <td>{{$yacht->name}}</td>
         <td>{{$yacht->build_year}}</td>
-        <td>{{$yacht->model}}</td> 
+        <td>{{$yacht->type?->name}}</td> 
         <td>{{$yacht->cabins}}</td>  
         <td> 
            <a href="/yachts/show/{{$yacht->id}}"><i class="fa-solid fa-bars"></i></a>

@@ -9,6 +9,10 @@
            <td>{{$yacht->name}}</td>
        </tr>
        <tr>
+           <td>Typ</td>
+           <td>{{$yacht?->type?->name}}</td>
+       </tr>       
+       <tr>
            <td>Rok budowy</td>
            <td>{{$yacht->build_year}}</td>
        </tr>

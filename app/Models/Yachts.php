@@ -20,7 +20,8 @@ class Yachts extends Model
         "cabins",
         "berths",
         "build_year",
-        "model_id"
+        "model_id",
+        "type_id"
     ]; 
 
     public function models() {
@@ -29,7 +30,11 @@ class Yachts extends Model
 
      public function producers() {
         return $this->belongsTo("App\Models\Producer", "producer_id");
-    }   
+    }  
+    
+     public function type() {
+        return $this->belongsTo("App\Models\Types", "type_id");
+    }     
 }
 
  
