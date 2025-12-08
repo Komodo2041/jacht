@@ -56,6 +56,46 @@ class YachtsController extends Controller
        return view("yachts/addedit", ['errors' => '', "producer" => $producer, 'yacht' => $yacht]);
     }
 
+   public function edit($id, Request $request) {
+        $yacht = Yachts::find($id);
+        $save =  $request->input('save');
+        $producer = Producer::with("models")->get();
+      
+        if ($yacht) { 
+           if ($save) {
+ 
+                $validator = Validator::make($request->all(), [
+                    'name' => 'required|string|max:255',
+                    'build_year' => 'required|integer',
+                    'length_meters' => 'required|integer',
+                    'producer_id' => 'nullable|integer',
+                    'model_id' => 'nullable|integer',
+                    'engine_count' => 'required|integer|min:1',
+                    'cabins' => 'required|integer|min:1',
+                    'berths' => 'required|integer|min:1',
+                    'fuel_tank_liters' => 'required|integer|min:1',
+                    'water_tank_liters' => 'required|integer|min:1',
+                    'propeller_type' => 'required|in:fixed,folding',
+                    'engine_brand' => 'nullable|string|max:200',
+                    'engine_model' => 'nullable|string|max:200',
+                    'model' => 'nullable|string|max:200'
+                ]);     
+
+                 if (!$validator->fails()) {
+                    $yacht->update($request->all());
+                    $yacht->save();
+                    return redirect("yachts")->with('success', 'Statek został pomyślnie edytowany!');
+                 } else {
+                    $yacht = new Yachts($request->all()); 
+                    return view("yachts/addedit", ['errors' => $this->getErrors($validator->errors()), "producer" => $producer, 'yacht' => $yacht, 'isedit' => true]);
+                 }
+           }  
+           return view("yachts/addedit", ['errors' => '', "producer" => $producer, 'yacht' => $yacht, 'isedit' => true]);
+        } 
+        return redirect("yachts")->with('error', 'Nie znaleziono statku');        
+    }
+
+
     private function getErrors($errors) {
         return implode(", ", $errors->all());
     }

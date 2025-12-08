@@ -29,7 +29,9 @@
     <select name="producer_id" id="producer_id" >
           <option value="">-</option>
             @foreach ($producer as $prod)
-                <option value="{{$prod->id}}">{{$prod->name}}</option>
+                <option value="{{$prod->id}}"  
+                {{ $prod->id == $yacht?->producer_id ? 'selected' : '' }}>
+                {{$prod->name}}</option>
             @endforeach
     </select>    
     
@@ -38,7 +40,9 @@
           <option value="">-</option>
             @foreach ($producer as $prod)
                 @foreach ($prod->models AS $m)
-                    <option value="{{$m->id}}" class=" mdpd model{{$prod->id}}  " style="display:none" >{{$m->name}}</option>
+                    <option value="{{$m->id}}" class=" mdpd model{{$prod->id}} "
+                      {{ $m->id == $yacht?->model_id ? 'selected' : '' }} 
+                    style="display:none" >{{$m->name}}</option>
                 @endforeach
             @endforeach
     </select>     
@@ -70,7 +74,11 @@
 
 
      <input type="hidden" value="1" name="save" />
+     @if (isset($isedit))
+     <input type="submit" value="Edytuj statek" />
+     @else
      <input type="submit" value="Dodaj nowy statek" />
+     @endif
     
 </form>
 
