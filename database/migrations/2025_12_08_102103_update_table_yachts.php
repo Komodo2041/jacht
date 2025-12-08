@@ -12,7 +12,7 @@ return new class extends Migration
     public function up(): void
     {
         Schema::table('yachts', function (Blueprint $table) {
-            $table->string('model_id')->nullable(); 
+            $table->integer('model_id')->nullable(); 
             $table->foreign("model_id")->references("id")->on("models");
         });
     }

@@ -19,8 +19,17 @@ class Yachts extends Model
         "length_meters",
         "cabins",
         "berths",
-        "build_year"
+        "build_year",
+        "model_id"
     ]; 
+
+    public function models() {
+        return $this->belongsTo(Models::class);
+    }
+
+     public function producers() {
+        return $this->belongsTo("App\Models\Producer");
+    }   
 }
 
  

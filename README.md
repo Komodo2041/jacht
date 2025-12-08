@@ -16,5 +16,5 @@ Na froncie postanowiłem użyć pico.css
  ----CRUD stanowisk  
  CRUD kategorie wyposażenia  
  ----CRUD wyposażenie  
-
-***CRUD jachty***  
+ CRUD jachty  
+ ---- **PIVot wyposażenie**
