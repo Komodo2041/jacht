@@ -166,19 +166,53 @@ class YachtsController extends Controller
     public function parametrs($id) {
 
        $yacht = Yachts::find($id);
-       $params = [];
-       $usedparams = [];
-
-       return view("yachts/params", ['yacht' => $yacht, 'usedparams' => $usedparams ]);
+       $usedparams = $yacht->parametrs;
+ 
+       if ($yacht) {
+          return view("yachts/params", ['yacht' => $yacht, 'usedparams' => $usedparams ]);
+       }
+       return redirect("yachts")->with('error', 'Nie znaleziono statku');
     }     
 
     public function parametrsChange($id, Request $request) {
-
+       $save =  $request->input('save');
        $params = Parameters::all();
-       
+       $yacht = Yachts::find($id);
+       $usedparams = $yacht->parametrs;
+       $currentValues = $usedparams->pluck('pivot.value', 'id')->toArray();
+ 
+       if ($yacht) {
+           if ($save) {
+                $messages = $this->createMessagesParametrs($params);
+                $validator = Validator::make($request->all(), [ 
+                    'params.*' => 'nullable|string|max:100',
+                ], $messages);
+                if (!$validator->fails()) {
+                    YachtsParametrs::where("yacht_id", $yacht->id)->delete();
+                    $data = $request->input('params');
+                    foreach ($data AS $key => $value) {
+                        if (trim($value)) {
+                            YachtsParametrs::create(["yacht_id" => $yacht->id, "parametr_id" => $key, "value" => trim($value)]);
+                        }
+                    }
+                    return redirect("/yachts/parameters/".$id)->with('error', 'Zmieniono dodatkowe parametry');
+                     
+                } else {
+                    return view("yachts/paramschange", ['errors' => $this->getErrors($validator->errors()), 'params' => $params, 'yacht' => $yacht, 'currentValues' => $currentValues]);
+                }
+           }  
+           return view("yachts/paramschange", ['errors' => '', 'params' => $params, 'yacht' => $yacht, 'usedparams' => $usedparams, 'currentValues' => $currentValues]);
+       }
+       return redirect("yachts")->with('error', 'Nie znaleziono statku');
+    }
 
-       return view("yachts/paramschange", ['params' => $params ]);
-    }     
-
+    private function createMessagesParametrs($params) {
+        $res = [];
+        foreach ($params AS $param) {
+           $res['params.'.$param->id] = "Pole '".$param->name."' jest za długie";
+        }
+        return $res;
+    }
+ 
 
 }
