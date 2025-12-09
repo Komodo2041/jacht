@@ -12,6 +12,8 @@ use App\Models\Types;
 
 use App\Models\Ports;
 use App\Models\ActualPort;
+use App\Models\Parameters;
+use App\Models\YachtsParametrs;
 
 use Illuminate\Support\Facades\Validator;
 
@@ -159,6 +161,24 @@ class YachtsController extends Controller
             return redirect("yachts")->with('success', 'Statek został usunięty');
         } 
         return redirect("yachts")->with('error', 'Nie znaleziono statku');
-    } 
+    }
+    
+    public function parametrs($id) {
+
+       $yacht = Yachts::find($id);
+       $params = [];
+       $usedparams = [];
+
+       return view("yachts/params", ['yacht' => $yacht, 'usedparams' => $usedparams ]);
+    }     
+
+    public function parametrsChange($id, Request $request) {
+
+       $params = Parameters::all();
+       
+
+       return view("yachts/paramschange", ['params' => $params ]);
+    }     
+
 
 }

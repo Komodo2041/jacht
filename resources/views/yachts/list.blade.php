@@ -35,6 +35,9 @@
         <td> 
             <a href="/yachts/show/{{$yacht->id}}"><i class="fa-solid fa-bars"></i></a>
             <a href="/yachts/changeport/{{$yacht->id}}"><i class="fa-solid fa-bacon" title="Change Port"></i></a>
+
+            <a href="/yachts/parameters/{{$yacht->id}}"><i class="fa-solid fa-bolt" title="Parameters"></i></a>
+
             <a href="/yachts/edit/{{$yacht->id}}"><i class="fa-solid fa-pencil"></i></a>
             <a href="/yachts/delete/{{$yacht->id}}" class="delrem"><i class="fa-solid fa-trash-can"></i></a>
         </td> 
