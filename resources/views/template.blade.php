@@ -65,7 +65,10 @@
                      </li>
                      <li>
                         <a href="/equipments">Podzespoły</a>
-                     </li>  
+                     </li>
+                     <li>
+                        <a href="/parameters">Parametry</a>
+                     </li>                     
                    </ul>
                 </details>
                 <details name="menu4">

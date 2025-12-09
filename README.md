@@ -17,14 +17,15 @@ Na froncie postanowiłem użyć pico.css
  CRUD kategorie wyposażenia  
  ----CRUD wyposażenie  
  CRUD jachty  
- ---- Acutal Port
+ ---- Aktualny Port
 
 
  ---- CRUD dodatkowe parametry  
  -------- PIVOT Dodatkowe parametry  
  ---- *PIVot wyposażenie*
-   
+
  ---- CRUD Dokumenty  
+ ---- CRUD Konfiguracja stanowsik  
  ---- PIVOT albums images  
  CRUD Albums  
 

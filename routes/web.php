@@ -56,3 +56,8 @@ Route::match(["get", "post"], '/yachts/edit/{id}', "App\Http\Controllers\YachtsC
 Route::get('/yachts/delete/{id}', "App\Http\Controllers\YachtsController@delete" );
 Route::get('/yachts/show/{id}', "App\Http\Controllers\YachtsController@show" );
 Route::match(["get", "post"], '/yachts/changeport/{id}', "App\Http\Controllers\YachtsController@changeport" );
+
+Route::get('/parameters', "App\Http\Controllers\ParametersController@list" );
+Route::match(["get", "post"], '/parameters/add', "App\Http\Controllers\ParametersController@add" );
+Route::match(["get", "post"], '/parameters/edit/{id}', "App\Http\Controllers\ParametersController@edit" );
+Route::get('/parameters/delete/{id}', "App\Http\Controllers\ParametersController@delete" );
