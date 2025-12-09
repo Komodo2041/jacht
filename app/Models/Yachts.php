@@ -34,7 +34,12 @@ class Yachts extends Model
     
      public function type() {
         return $this->belongsTo("App\Models\Types", "type_id");
-    }     
+    }   
+ 
+    public function port() {
+        return $this->belongsToMany(Ports::class, ActualPort::class, "yachts_id", "port_id");
+                
+    }
 }
 
  

@@ -53,8 +53,12 @@
            <td>{{$yacht->engine_model}}</td>
        </tr>
        <tr>
+            <td>Moc silnika</td>
+            <td>{{$yacht->engine_power_hp}} KM</td>
+       </tr>
+       <tr>
            <td>Liczba Silników</td>
-           <td>{{$yacht->engine_count}}/td>
+           <td>{{$yacht->engine_count}}</td>
        </tr>   
        <tr>
            <td>Liczba Kabin</td>
@@ -74,6 +78,11 @@
        </tr>  
 
    </table>
+   
+   <hr/>
+ 
+   <b>Port: {{$yacht->port[0]->name}}</b> 
+
 </div>
 
 @endsection('content')

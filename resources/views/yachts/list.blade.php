@@ -14,6 +14,7 @@
             <th scope="col">Rok Budowy</th>
             <th scope="col">Typ</th> 
             <th scope="col">Liczba Kabin</th>
+            <th scope="col">Port</th>
             <th></th>
           </tr>
     </thead>
@@ -24,8 +25,16 @@
         <td>{{$yacht->build_year}}</td>
         <td>{{$yacht->type?->name}}</td> 
         <td>{{$yacht->cabins}}</td>  
+        <td>
+         @if (isset($yacht->port[0]))
+          {{$yacht->port[0]->name}}
+         @else
+            -
+         @endif    
+         </td> 
         <td> 
-           <a href="/yachts/show/{{$yacht->id}}"><i class="fa-solid fa-bars"></i></a>
+            <a href="/yachts/show/{{$yacht->id}}"><i class="fa-solid fa-bars"></i></a>
+            <a href="/yachts/changeport/{{$yacht->id}}"><i class="fa-solid fa-bacon" title="Change Port"></i></a>
             <a href="/yachts/edit/{{$yacht->id}}"><i class="fa-solid fa-pencil"></i></a>
             <a href="/yachts/delete/{{$yacht->id}}" class="delrem"><i class="fa-solid fa-trash-can"></i></a>
         </td> 

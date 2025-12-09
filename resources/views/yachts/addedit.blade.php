@@ -29,6 +29,17 @@
             @endforeach
     </select> 
 
+    <label>Aktualny port</label>
+    <select name="port_id" >
+          <option value="">-</option>
+            @foreach ($ports as $port)
+                <option value="{{$port->id}}"
+                {{ $port->id == $yacht->port[0]?->id ? 'selected' : '' }}
+                >
+                {{$port->name}}</option>
+            @endforeach
+    </select> 
+
 
     <label>Typ śruby</label> 
     <select name="propeller_type">
@@ -71,6 +82,9 @@
      <label>Model Silnika</label>
      <input type="text" name="engine_model" placeholder="Model silnika" value="{{$yacht->engine_model}}" />    
      
+     <label>Moc Silnika w KM</label>
+     <input type="text" name="engine_power_hp" placeholder="Moc silnika" value="{{$yacht->engine_power_hp}}" />   
+
      <label>Liczba Silników</label>
      <input type="number" name="engine_count" min="1" value="{{$yacht->engine_count}}"  >      
 

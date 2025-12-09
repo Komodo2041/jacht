@@ -10,13 +10,16 @@ use App\Models\Producer;
 use App\Models\Models;
 use App\Models\Types;
 
+use App\Models\Ports;
+use App\Models\ActualPort;
+
 use Illuminate\Support\Facades\Validator;
 
 class YachtsController extends Controller
 {
     public function list() {
  
-       $yachts = Yachts::with(["models", "type"])->get();
+       $yachts = Yachts::with(["models", "type", "port"])->get();
        return view("yachts/list", ["yachts" => $yachts]);
     }
 
@@ -25,7 +28,8 @@ class YachtsController extends Controller
        $producer = Producer::with("models")->get();
        $yacht = new Yachts();
        $types = Types::all();
-
+       $ports = Ports::all();
+ 
        if ($save) {
 
         $validator = Validator::make($request->all(), [
@@ -43,19 +47,22 @@ class YachtsController extends Controller
             'engine_brand' => 'nullable|string|max:200',
             'engine_model' => 'nullable|string|max:200',
             'model' => 'nullable|string|max:200',
-            'type_id' => 'required|integer'
+            'type_id' => 'required|integer', 
+            'port_id' => 'required|integer',
+            'engine_power_hp' => 'required|integer',
         ]);
 
         if ($validator->fails()) {
             $yacht = new Yachts($request->all()); 
-            return view("yachts/addedit", ['errors' => $this->getErrors($validator->errors()), "producer" => $producer, 'yacht' => $yacht, 'types' => $types]);
+            return view("yachts/addedit", ['errors' => $this->getErrors($validator->errors()), "producer" => $producer, 'yacht' => $yacht, 'types' => $types, 'ports' => $ports]);
         } else {
-            Yachts::create($request->all());
+            $yacht = Yachts::create($request->all());
+            ActualPort::create(["yachts_id" => $yacht->id, "port_id" => $request->input('port_id')]);
             return redirect("yachts")->with('success', 'Statek został dodany pomyślnie!');
         }
  
        }
-       return view("yachts/addedit", ['errors' => '', "producer" => $producer, 'yacht' => $yacht, 'types' => $types]);
+       return view("yachts/addedit", ['errors' => '', "producer" => $producer, 'yacht' => $yacht, 'types' => $types, 'ports' => $ports]);
     }
 
    public function edit($id, Request $request) {
@@ -63,6 +70,7 @@ class YachtsController extends Controller
         $save =  $request->input('save');
         $producer = Producer::with("models")->get();
         $types = Types::all();
+        $ports = Ports::all();
 
         if ($yacht) { 
            if ($save) {
@@ -82,30 +90,63 @@ class YachtsController extends Controller
                     'engine_brand' => 'nullable|string|max:200',
                     'engine_model' => 'nullable|string|max:200',
                     'model' => 'nullable|string|max:200',
-                    'type_id' => 'required|integer'
+                    'type_id' => 'required|integer',
+                    'port_id' => 'required|integer',
+                    'engine_power_hp' => 'required|integer',                    
                 ]);     
 
                  if (!$validator->fails()) {
-                    $yacht->update($request->all());
+                    $yacht->update($request->all()); 
                     $yacht->save();
+                    $this->saveport($yacht->id, $request->input('port_id')); 
                     return redirect("yachts")->with('success', 'Statek został pomyślnie edytowany!');
                  } else {
                     $yacht = new Yachts($request->all()); 
-                    return view("yachts/addedit", ['errors' => $this->getErrors($validator->errors()), "producer" => $producer, 'yacht' => $yacht, 'isedit' => true, 'types' => $types]);
+                    return view("yachts/addedit", ['errors' => $this->getErrors($validator->errors()), "producer" => $producer, 'yacht' => $yacht, 'isedit' => true, 'types' => $types, 'ports' => $ports]);
                  }
            }  
-           return view("yachts/addedit", ['errors' => '', "producer" => $producer, 'yacht' => $yacht, 'isedit' => true, 'types' => $types]);
+           return view("yachts/addedit", ['errors' => '', "producer" => $producer, 'yacht' => $yacht, 'isedit' => true, 'types' => $types, 'ports' => $ports]);
         } 
         return redirect("yachts")->with('error', 'Nie znaleziono statku');        
     }
-
+ 
+    private function saveport($yacht_id, $port_id) {
+        $actport = ActualPort::where("yachts_id", $yacht_id)->first();
+        if ($actport) {
+            $actport->port_id = $port_id;
+            $actport->save();
+        } else {
+            ActualPort::create(["yachts_id" => $yacht_id, "port_id" => $port_id]);
+        }
+        
+    } 
 
     private function getErrors($errors) {
         return implode(", ", $errors->all());
     }
 
+    public function changeport($id, Request $request) {
+        $save =  $request->input('save');
+        $yacht = Yachts::find($id);
+        $ports = Ports::all();
+        if ($yacht) {
+            if ($save) {
+                $validator = Validator::make($request->all(), ['port_id' => 'required|integer'], ['port_id.required' => "Port jest wymagany"]);
+                if (!$validator->fails()) {
+                    $this->saveport($yacht->id, $request->input('port_id'));
+                    return redirect("yachts")->with('success', 'Port został zmieniony!');
+                } else {
+                  return view("yachts/changeport", ['errors' => $this->getErrors($validator->errors()), 'yacht' => $yacht, 'ports' => $ports]);
+                }
+            }
+            return view("yachts/changeport", ['errors' => '', 'yacht' => $yacht, 'ports' => $ports]);
+        }
+        return redirect("yachts")->with('error', 'Nie znaleziono statku');
+    }  
+
     public function show($id) {
        $yacht = Yachts::find($id); 
+       
        if ($yacht) {
             return view("yachts/show", ['yacht' => $yacht ]);
        }

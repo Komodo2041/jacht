@@ -17,8 +17,9 @@ Na froncie postanowiłem użyć pico.css
  CRUD kategorie wyposażenia  
  ----CRUD wyposażenie  
  CRUD jachty  
-
- ---- Acutal Port  
+ ---- Acutal Port
+ 
+   
  ---- CRUD dodatkowe parametry  
  -------- PIVOT Dodatkowe parametry  
  ---- ****PIVot wyposażenie****  

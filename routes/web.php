@@ -55,3 +55,4 @@ Route::match(["get", "post"], '/yachts/add', "App\Http\Controllers\YachtsControl
 Route::match(["get", "post"], '/yachts/edit/{id}', "App\Http\Controllers\YachtsController@edit" );
 Route::get('/yachts/delete/{id}', "App\Http\Controllers\YachtsController@delete" );
 Route::get('/yachts/show/{id}', "App\Http\Controllers\YachtsController@show" );
+Route::match(["get", "post"], '/yachts/changeport/{id}', "App\Http\Controllers\YachtsController@changeport" );
