@@ -16,14 +16,13 @@ use App\Models\Parameters;
 use App\Models\YachtsParametrs;
 use App\Models\Equipment_category;
 use App\Models\YachtEq;
-
+use App\Models\Albums;
  
 use Illuminate\Support\Facades\Validator;
 
 class YachtsController extends Controller
 {
-    public function list() {
- 
+    public function list() { 
        $yachts = Yachts::with(["models", "type", "port"])->get();
        return view("yachts/list", ["yachts" => $yachts]);
     }
@@ -281,17 +280,97 @@ class YachtsController extends Controller
         }
         return $res;
     }
+ 
+    public function albums($id) {
+        $yacht = Yachts::find($id);
+      
+        if ($yacht) {
+            $albums = $yacht->albums()->get();
+      
+            return view("yachts/albums/list", ["yacht" => $yacht, 'albums' => $albums]);
+        }
+        return redirect("yachts")->with('error', 'Nie znaleziono statku');  
+    }
 
-    /*
-    $yacht->albums()->create([
-    'title'       => 'Wnętrze 2025',
-    'description' => 'Zdjęcia po remoncie',
-     ]);
-     */
+    public function album_add($id, Request $request) {
+       $save =  $request->input('save');
+       $album = new Albums();
+       $yacht = Yachts::find($id);
+       if ($yacht) {
+            if ($save) { 
+                $validator = Validator::make($request->all(), 
+                    [
+                        'name' => 'required|string|max:100',
+                    ],
+                    [
+                        'name.required' => "Pole Nazwa jest wymagane",
+                        'name.max' => "Pole Nazwa jest za długie",
+                    ]
+                );
+        
+                if ($validator->fails()) {
+                    $validated = $validator->errors()->all();
+                    $album = new Albums($request->all());
+                    return view("yachts/albums/addedit", ['errors' => implode(", ", $validated), 'album' => $album]);
+                } else {
+                    $validated = $validator->validated();
+                    $yacht->albums()->create($request->all());
+                    return redirect("yachts/albums/".$yacht->id)->with('success', 'Album został dodany pomyślnie!');
+                } 
+            }
+            return view("yachts/albums/addedit", ['errors' => '', 'album' => $album]);
+       }
+       return redirect("yachts")->with('error', 'Nie znaleziono statku');  
+    }
 
-    public function albums() {
-
+    public function album_edit($id, $aid, Request $request) {
+       $save =  $request->input('save');
+       $album = Albums::find($aid);
+       if (!$album) {
+            return redirect("yachts")->with('error', 'Nie znaleziono albumu');  
+       }
+       $yacht = Yachts::find($id);
+       if ($yacht) {
+            if ($save) { 
+                $validator = Validator::make($request->all(), 
+                    [
+                        'name' => 'required|string|max:100',
+                    ],
+                    [
+                        'name.required' => "Pole Nazwa jest wymagane",
+                        'name.max' => "Pole Nazwa jest za długie",
+                    ]
+                );
+        
+                if ($validator->fails()) {
+                    $validated = $validator->errors()->all();
+                    $album = new Albums($request->all());
+                    return view("yachts/albums/addedit", ['errors' => implode(", ", $validated), 'album' => $album, 'isedit' => true]);
+                } else {
+                    $validated = $validator->validated();
+                    $album->update($request->all());
+                    return redirect("yachts/albums/".$yacht->id)->with('success', 'Album został edytowany pomyślnie!');
+                } 
+            }
+            return view("yachts/albums/addedit", ['errors' => '', 'album' => $album, 'isedit' => true]);
+       }
+       return redirect("yachts")->with('error', 'Nie znaleziono statku');  
+ 
     }
  
+    public function album_delete($id, $aid) {
+       $album = Albums::find($aid);
+       if (!$album) {
+            return redirect("yachts")->with('error', 'Nie znaleziono albumu');  
+       }
+       $yacht = Yachts::find($id);
+       if ($yacht) {
+           $album->delete();
+           return redirect("yachts/albums/".$yacht->id)->with('success', 'Album został usunięty');
+       }
+       return redirect("yachts")->with('error', 'Nie znaleziono statku'); 
+
+    }
+
 
 }

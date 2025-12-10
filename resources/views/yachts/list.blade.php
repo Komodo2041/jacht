@@ -30,21 +30,17 @@
           {{$yacht->port[0]->name}}
          @else
             -
-         @endif    <i class="fa-solid fa-anchor"></i>
+         @endif
          </td> 
         <td> 
 
            
 <i class="fa-solid fa-bars-progress"></i>
-<i class="fa-solid fa-camera"></i>
+            <a href="/yachts/albums/{{$yacht->id}}"><i class="fa-solid fa-camera"></i></a>
   
            <a href="/yachts/equimpents/{{$yacht->id}}"><i class="fa-solid fa-binoculars" title="Wyposażenie"></i></a>
-
             <a href="/yachts/show/{{$yacht->id}}"><i class="fa-solid fa-bars"></i></a>
             <a href="/yachts/changeport/{{$yacht->id}}"><i class="fa-solid fa-anchor" title="Change Port"></i></a>
- 
-      
-
             <a href="/yachts/parameters/{{$yacht->id}}"><i class="fa-solid fa-bolt" title="Parameters"></i></a>
 
             <a href="/yachts/edit/{{$yacht->id}}"><i class="fa-solid fa-pencil"></i></a>

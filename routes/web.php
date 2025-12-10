@@ -60,6 +60,12 @@ Route::match(["get", "post"], '/yachts/parametrschange/{id}', "App\Http\Controll
 Route::get('/yachts/parameters/{id}', "App\Http\Controllers\YachtsController@parametrs" );
 Route::match(["get", "post"], '/yachts/equimpents/{id}', "App\Http\Controllers\YachtsController@equimpents" );
 
+Route::get('/yachts/albums/{id}', "App\Http\Controllers\YachtsController@albums" );
+Route::match(["get", "post"], '/yachts/albums/{id}/add', "App\Http\Controllers\YachtsController@album_add" );
+Route::match(["get", "post"], '/yachts/albums/{id}/edit/{aid}', "App\Http\Controllers\YachtsController@album_edit" );
+Route::get('/yachts/albums/{id}/delete/{aid}', "App\Http\Controllers\YachtsController@album_delete" );
+
+
 Route::get('/parameters', "App\Http\Controllers\ParametersController@list" );
 Route::match(["get", "post"], '/parameters/add', "App\Http\Controllers\ParametersController@add" );
 Route::match(["get", "post"], '/parameters/edit/{id}', "App\Http\Controllers\ParametersController@edit" );
