@@ -19,7 +19,7 @@
     @forelse ($jobs as $job)
     <tr>
         <td>{{$job->name}}</td>
-        <td>{{$job->department->name}}</td> 
+        <td>{{$job->department?->name}}</td> 
         <td> 
             <a href="/jobs/edit/{{$job->id}}"><i class="fa-solid fa-pencil"></i></a>
             <a href="/jobs/delete/{{$job->id}}" class="delrem"><i class="fa-solid fa-trash-can"></i></a>

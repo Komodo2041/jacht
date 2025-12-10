@@ -78,7 +78,7 @@
                         <a href="/producer">Producenci</a>
                      </li>
                      <li>
-                        <a href="/models">Modele</a>
+                        <a href="/models">Modele [Nie działa]</a>
                      </li>                                 
                    </ul>
                 </details>
