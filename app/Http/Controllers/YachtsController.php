@@ -14,7 +14,10 @@ use App\Models\Ports;
 use App\Models\ActualPort;
 use App\Models\Parameters;
 use App\Models\YachtsParametrs;
+use App\Models\Equipment_category;
+use App\Models\YachtEq;
 
+ 
 use Illuminate\Support\Facades\Validator;
 
 class YachtsController extends Controller
@@ -148,9 +151,14 @@ class YachtsController extends Controller
 
     public function show($id) {
        $yacht = Yachts::find($id); 
-       
+       $usedEq = $yacht->equimpents()->with("category")->get(); 
+       $res = [];
+       foreach ($usedEq AS $eq) {
+          $res[$eq->category->name][] = ["id" => $eq->id, "name" => $eq->name, "value" => $eq->pivot->value ];
+       }
+ 
        if ($yacht) {
-            return view("yachts/show", ['yacht' => $yacht ]);
+            return view("yachts/show", ['yacht' => $yacht, 'eqs' => $res]);
        }
     }
 
@@ -206,10 +214,70 @@ class YachtsController extends Controller
        return redirect("yachts")->with('error', 'Nie znaleziono statku');
     }
 
+    public function equimpents($id, Request $request) {
+       $save =  $request->input('save');
+       $eqs = Equipment_category::with("equipments")->get();
+       $yacht = Yachts::find($id);
+       $usedEq = $yacht->equimpents()->pluck('yacht_equipments.value' , 'equipment.id')->toArray();
+       
+       if ($yacht) {
+           if ($save) {    
+               
+                $messages = $this->createMessagesEq($eqs);
+                $validator = Validator::make($request->all(), [ 
+                    'eq.val*' => 'nullable|string|max:100',
+                ], $messages);
+                if (!$validator->fails()) {
+                    YachtEq::where("yacht_id", $yacht->id)->delete();
+                    $data = $this->getEqsData($request->input('eq'));
+                    foreach ($data AS $key => $param) {
+                      
+                       YachtEq::create([
+                           "yacht_id" =>  $yacht->id,
+                           "eq_id" =>  (int) $key,
+                           "value" => isset($param['value']) ? $param['value'] : null
+                       ]);
+                    }
+                     return redirect("/yachts/show/".$id)->with('error', 'Zmieniono wyposażenie');
+               
+                } else {
+
+                }
+           }  
+           return view("yachts/eqs", ['errors' => '', 'yacht' => $yacht, "eqs" =>  $eqs, 'currentValues' => $usedEq]);
+       }
+       return redirect("yachts")->with('error', 'Nie znaleziono statku');               
+    }
+
     private function createMessagesParametrs($params) {
         $res = [];
         foreach ($params AS $param) {
            $res['params.'.$param->id] = "Pole '".$param->name."' jest za długie";
+        }
+        return $res;
+    }
+
+    private function createMessagesEq($eqs) {
+        $res = [];
+        foreach ($eqs AS $eq) {
+            foreach ($eq->equipments AS $param) {
+                $res['eq.val'.$param->id] = "Pole '".$param->name."' jest za długie";
+            }
+        }
+        return $res;       
+    }
+
+    private function getEqsData($param) {
+        $res = [];    
+        foreach ($param AS $key => $value) {
+           if ($value) {
+            if (str_starts_with($key, "val")) {
+                $id = str_replace( "val", "", $key);
+                $res[$id]['value'] = $value;
+            } else {
+                $res[$key]['is'] = 1;
+            }
+           }
         }
         return $res;
     }

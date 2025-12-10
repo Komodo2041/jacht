@@ -2,7 +2,7 @@
 @section('content')
 
 <div>
-   
+   <h5>Dane:</h5>
    <table>
        <tr>
            <td>Nazwa Statku</td>
@@ -81,7 +81,16 @@
    
    <hr/>
  
-   <b>Port: {{$yacht->port[0]->name}}</b> 
+   <h5>Port:</h5> {{$yacht->port[0]->name}}</b> <br/><br/>
+   <h5>Wyposażenie:</h5> 
+   @forelse ($eqs AS $key => $eq)
+      <b>{{$key}}</b><br/>
+      @foreach($eq AS $p)
+         {{$p['name']}} : {{$p['value']}}<br/>
+      @endforeach 
+   @empty
+    <p>-</p>
+   @endforelse 
 
 </div>
 

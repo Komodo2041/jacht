@@ -33,6 +33,25 @@ document.addEventListener('DOMContentLoaded', function () {
         });
     }
 
+    const eqs = document.querySelectorAll(".eq");
+    if (eqs) {
+        eqs.forEach(item => {
+            item.addEventListener('change', function () {
+                console.log(item)
+                const id = item.getAttribute("data-id");
+                const ch = item.checked;
+                if (ch) {
+                    document.getElementById("eqval" + id).style.display = "block";
+                } else {
+                    document.getElementById("eqval" + id).value = "";
+                    document.getElementById("eqval" + id).style.display = "none";
+                }
+
+            });
+        });
+    }
+
+
 });
 
 
