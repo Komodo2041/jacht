@@ -11,15 +11,15 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('yachts_parameters', function (Blueprint $table) {
+        Schema::create('yacht_equipments', function (Blueprint $table) {
             $table->id();
             $table->integer("yacht_id");
-            $table->integer("parametr_id");
-            $table->string("value", 100); 
+            $table->integer("eq_id");
+            $table->string("value", 100)->nullable(); 
             $table->timestamps();
 
             $table->foreign("yacht_id")->references("id")->on("yachts");
-            $table->foreign("parametr_id")->references("id")->on("parametrs");
+            $table->foreign("eq_id")->references("id")->on("equipment");
         });
     }
 
@@ -28,6 +28,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-         Schema::dropIfExists('yachts_parameters');
+        chema::dropIfExists('yacht_equipments');
     }
 };

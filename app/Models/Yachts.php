@@ -43,6 +43,11 @@ class Yachts extends Model
     public function parametrs() {
         return $this->belongsToMany(Parameters::class, YachtsParametrs::class, "yacht_id", "parametr_id")->withPivot('value');  
     }
+
+    public function equimpents() {
+        return $this->belongsToMany(Equipments::class, YachtsParametrs::class, "yacht_id", "eq_id")->withPivot('value');  
+    }
+
 }
 
  

@@ -23,8 +23,14 @@ Na froncie postanowiłem użyć pico.css
 
   
  ---- PIVOT wyposażenie  
+
  ---- CRUD Dokumenty    
  ---- CRUD Konfiguracja stanowsik   
+ 
  ---- PIVOT albums images   
- CRUD Albums   
+CRUD Albums   
+
+ Załoga
+   -- documents
+   
 
