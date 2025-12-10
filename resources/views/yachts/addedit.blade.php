@@ -34,7 +34,9 @@
           <option value="">-</option>
             @foreach ($ports as $port)
                 <option value="{{$port->id}}"
-                {{ $port->id == $yacht->port[0]?->id ? 'selected' : '' }}
+                @if (isset($yacht->port[0]))
+                   {{ $port->id == $yacht->port[0]?->id ? 'selected' : '' }}
+                @endif
                 >
                 {{$port->name}}</option>
             @endforeach

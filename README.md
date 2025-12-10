@@ -20,9 +20,9 @@ Na froncie postanowiłem użyć pico.css
  ---- Aktualny Port  
  ---- CRUD dodatkowe parametry  
  -------- PIVOT Dodatkowe parametry    
- ---- PIVOT wyposażenie
- ---- CRUD Albums  
- 
+ ---- PIVOT wyposażenie   
+ ---- CRUD Albums   
+
  -------- *Images*  
 
  ---- CRUD Dokumenty    
