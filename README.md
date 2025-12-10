@@ -20,15 +20,16 @@ Na froncie postanowiłem użyć pico.css
  ---- Aktualny Port  
  ---- CRUD dodatkowe parametry  
  -------- PIVOT Dodatkowe parametry    
+ ---- PIVOT wyposażenie
 
-  
- ---- PIVOT wyposażenie  
+
 
  ---- CRUD Dokumenty    
  ---- CRUD Konfiguracja stanowsik   
- 
- ---- PIVOT albums images   
+  
 CRUD Albums   
+----- Images
+
 
  Załoga
    -- documents

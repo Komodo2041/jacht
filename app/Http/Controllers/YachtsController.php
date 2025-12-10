@@ -241,7 +241,7 @@ class YachtsController extends Controller
                      return redirect("/yachts/show/".$id)->with('error', 'Zmieniono wyposażenie');
                
                 } else {
-
+                    return view("yachts/eqs", ['errors' => $this->getErrors($validator->errors()), 'yacht' => $yacht, "eqs" =>  $eqs, 'currentValues' => $usedEq]);
                 }
            }  
            return view("yachts/eqs", ['errors' => '', 'yacht' => $yacht, "eqs" =>  $eqs, 'currentValues' => $usedEq]);
@@ -280,6 +280,17 @@ class YachtsController extends Controller
            }
         }
         return $res;
+    }
+
+    /*
+    $yacht->albums()->create([
+    'title'       => 'Wnętrze 2025',
+    'description' => 'Zdjęcia po remoncie',
+     ]);
+     */
+
+    public function albums() {
+
     }
  
 

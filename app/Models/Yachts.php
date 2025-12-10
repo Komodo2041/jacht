@@ -48,6 +48,11 @@ class Yachts extends Model
         return $this->belongsToMany(Equipments::class, YachtEq::class, "yacht_id", "eq_id")->withPivot('value');  
     }
 
+    public function albums()
+    {
+        return $this->morphMany(Albums::class, 'albumable');
+    }    
+
 }
 
  

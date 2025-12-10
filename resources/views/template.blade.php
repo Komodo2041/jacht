@@ -76,7 +76,10 @@
                    <ul >
                      <li>
                         <a href="/producer">Producenci</a>
-                     </li>                      
+                     </li>
+                     <li>
+                        <a href="/models">Modele</a>
+                     </li>                                 
                    </ul>
                 </details>
                 <hr />
