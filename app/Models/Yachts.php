@@ -53,6 +53,11 @@ class Yachts extends Model
         return $this->morphMany(Albums::class, 'albumable');
     }    
 
+    public function documents()
+    {
+        return $this->morphMany(Documents::class, 'documentable');
+    }  
+
 }
 
  

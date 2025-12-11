@@ -16,7 +16,7 @@ Na froncie postanowiłem użyć pico.css
  ----CRUD stanowisk  
  CRUD kategorie wyposażenia  
  ----CRUD wyposażenie
- CRUD Typt Dokumentów   
+ CRUD Typy Dokumentów   
  CRUD jachty  *Filtrowanie*  
  ---- Aktualny Port  
  ---- CRUD dodatkowe parametry  
@@ -24,9 +24,7 @@ Na froncie postanowiłem użyć pico.css
  ---- PIVOT wyposażenie   
  ---- CRUD Albums   
  -------- CRUD Images  
-
-
- ---- CRUD Dokumenty       
+ ---- CRUD Dokumenty         
 
 
  ---- CRUD Konfiguracja stanowsik  (np do rejsu jest wymgany kucharz i kapitan)
