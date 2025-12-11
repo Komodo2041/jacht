@@ -65,8 +65,12 @@ Route::match(["get", "post"], '/yachts/albums/{id}/add', "App\Http\Controllers\Y
 Route::match(["get", "post"], '/yachts/albums/{id}/edit/{aid}', "App\Http\Controllers\YachtsController@album_edit" );
 Route::get('/yachts/albums/{id}/delete/{aid}', "App\Http\Controllers\YachtsController@album_delete" );
 
-
 Route::get('/parameters', "App\Http\Controllers\ParametersController@list" );
 Route::match(["get", "post"], '/parameters/add', "App\Http\Controllers\ParametersController@add" );
 Route::match(["get", "post"], '/parameters/edit/{id}', "App\Http\Controllers\ParametersController@edit" );
 Route::get('/parameters/delete/{id}', "App\Http\Controllers\ParametersController@delete" );
+
+Route::get('/albums/{id}', "App\Http\Controllers\ImagesController@albums" );
+Route::match(["get", "post"], '/albums/{id}/add', "App\Http\Controllers\ImagesController@album_add" );
+Route::match(["get", "post"], '/albums/{id}/edit/{aid}', "App\Http\Controllers\ImagesController@album_edit" );
+Route::get('/albums/{id}/delete/{fid}', "App\Http\Controllers\ImagesController@album_delete" );

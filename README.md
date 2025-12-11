@@ -22,8 +22,9 @@ Na froncie postanowiłem użyć pico.css
  -------- PIVOT Dodatkowe parametry    
  ---- PIVOT wyposażenie   
  ---- CRUD Albums   
+ -------- CRUD Images
 
- -------- *Images*  
+ 
 
  ---- CRUD Dokumenty    
  ---- CRUD Konfiguracja stanowsik   
