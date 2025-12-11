@@ -82,8 +82,16 @@
                      </li>                                 
                    </ul>
                 </details>
+                <details name="menu5">
+                <summary>Inne </summary>
+                   <ul >
+                     <li>
+                        <a href="/documentstypes">Typy Dokumentów</a>
+                     </li>                               
+                   </ul>
+                </details>                
                 <hr />
-
+ 
             </div>    
             <div id="content">
               @yield("content")

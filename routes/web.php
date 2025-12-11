@@ -74,3 +74,8 @@ Route::get('/albums/{id}', "App\Http\Controllers\ImagesController@albums" );
 Route::match(["get", "post"], '/albums/{id}/add', "App\Http\Controllers\ImagesController@album_add" );
 Route::match(["get", "post"], '/albums/{id}/edit/{aid}', "App\Http\Controllers\ImagesController@album_edit" );
 Route::get('/albums/{id}/delete/{fid}', "App\Http\Controllers\ImagesController@album_delete" );
+
+Route::get('/documentstypes', "App\Http\Controllers\DocumentsTypesController@list" );
+Route::match(["get", "post"], '/documentstypes/add', "App\Http\Controllers\DocumentsTypesController@add" );
+Route::match(["get", "post"], '/documentstypes/edit/{id}', "App\Http\Controllers\DocumentsTypesController@edit" );
+Route::get('/documentstypes/delete/{id}', "App\Http\Controllers\DocumentsTypesController@delete" );
