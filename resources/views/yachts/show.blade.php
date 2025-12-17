@@ -92,6 +92,16 @@
     <p>-</p>
    @endforelse 
 
+   <h5>Stanowiska - konfiguracje</h5>
+    @if ($yacht->has_pos_conf)
+       @foreach ($conf AS $c)
+          {{$c->job->name}}: {{$c->value}}<br/>
+       @endforeach
+    @else
+       <p>Brak ustawień</p>
+    @endif
+
+   
 </div>
 
 @endsection('content')

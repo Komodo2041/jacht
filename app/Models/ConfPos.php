@@ -19,7 +19,7 @@ class ConfPos extends Model
    }
 
    public function job() {
-       return $this->belongsTo("App\Models\Job", 'dept_id');
+       return $this->belongsTo("App\Models\Job", 'job_id');
    }
 
 }

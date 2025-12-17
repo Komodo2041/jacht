@@ -21,7 +21,8 @@ class Yachts extends Model
         "berths",
         "build_year",
         "model_id",
-        "type_id"
+        "type_id",
+        "has_pos_conf"
     ]; 
 
     public function models() {

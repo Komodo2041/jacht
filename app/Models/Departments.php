@@ -11,7 +11,7 @@ class Departments extends Model
     public $table = "departments";
 
     public function jobs() {
-        return $this->hasMany("App\Models\Job");
+        return $this->hasMany("App\Models\Job", "dept_id");
     } 
 }
 

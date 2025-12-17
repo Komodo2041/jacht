@@ -18,6 +18,9 @@ use App\Models\Equipment_category;
 use App\Models\YachtEq;
 use App\Models\Albums;
  
+use App\Models\Departments;
+use App\Models\ConfPos;
+
 use Illuminate\Support\Facades\Validator;
 
 class YachtsController extends Controller
@@ -152,12 +155,14 @@ class YachtsController extends Controller
        $yacht = Yachts::find($id); 
        $usedEq = $yacht->equimpents()->with("category")->get(); 
        $res = [];
+       $conf = ConfPos::where("yacht_id", $id)->with("job")->get();
+
        foreach ($usedEq AS $eq) {
           $res[$eq->category->name][] = ["id" => $eq->id, "name" => $eq->name, "value" => $eq->pivot->value ];
        }
  
        if ($yacht) {
-            return view("yachts/show", ['yacht' => $yacht, 'eqs' => $res]);
+            return view("yachts/show", ['yacht' => $yacht, 'eqs' => $res, 'conf' => $conf]);
        }
     }
 
@@ -373,8 +378,52 @@ class YachtsController extends Controller
     }
 
     public function positionconfiguration($id, Request $request) {
-echo $id; exit();
+       $yacht = Yachts::find($id);;
+       if (!$yacht) {
+            return redirect("yachts")->with('error', 'Nie znaleziono jachtu');  
+       }    
+       $dept = Departments::with("jobs")->get();
+       $save =  $request->input('save');
+       $current = ConfPos::where("yacht_id", $id)->get()->pluck("value", "job_id");
+ 
+       if ($save) {
+            
+                $validator = Validator::make($request->all(), 
+                    [
+                        'conf.*' => 'nullable|integer', 
+                    ],
+                );
+        
+                if ($validator->fails()) {
+                    $validated = $validator->errors()->all(); 
+                    return view("yachts/configpos", ['errors' => implode(", ", $validated), 'dept' => $dept, 'yacht' => $yacht, 'currentValues' => $current ]);
+                } else {
+                    $validated = $validator->validated();
+                    $hasoptions = $request->input("hasoptions") ?? 0;
+ 
+                    if ($yacht->has_pos_conf != $hasoptions) {
+                       $yacht->has_pos_conf = $hasoptions;
+                       $yacht->save();
+                    }  
+                
+                    ConfPos::where("yacht_id", $id)->delete();
+                    foreach ($validated['conf'] as $key => $val) {
+                        if ($val) {
+                            $key = str_replace("val", "", $key);
+                            ConfPos::create([
+                               "yacht_id" => $id,
+                               "job_id" => $key,
+                               "value" => $val,
+                            ]);
+                        }
+                    }  
+                    return redirect("yachts")->with('success', 'Zmieniono konfigurację stanowisk dla jachtu');
+                }         
+
+       }
+       return view("yachts/configpos", ['errors' => '', 'dept' => $dept, 'yacht' => $yacht, 'currentValues' => $current ]);
     }
 
+ 
 
 }
