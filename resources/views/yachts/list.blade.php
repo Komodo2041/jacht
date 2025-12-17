@@ -34,12 +34,10 @@
          </td> 
         <td> 
 
-           
-<i class="fa-solid fa-bars-progress"></i>
- 
- 
-            <a href="/yachts/documents/{{$yacht->id}}"><i class="fa-solid fa-file-arrow-down"></i></a>
-            <a href="/yachts/albums/{{$yacht->id}}"><i class="fa-solid fa-camera"></i></a>
+            <a href="/yachts/positionconfiguration/{{$yacht->id}}"><i class="fa-solid fa-bars-progress" title="Stanowiska - konfiguracje "></i></a>
+
+            <a href="/yachts/documents/{{$yacht->id}}"><i class="fa-solid fa-file-arrow-down" title="Dokumenty"></i></a>
+            <a href="/yachts/albums/{{$yacht->id}}"><i class="fa-solid fa-camera" title="Zdjęcia"></i></a>
   
            <a href="/yachts/equimpents/{{$yacht->id}}"><i class="fa-solid fa-binoculars" title="Wyposażenie"></i></a>
             <a href="/yachts/show/{{$yacht->id}}"><i class="fa-solid fa-bars"></i></a>

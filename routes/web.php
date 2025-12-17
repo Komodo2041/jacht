@@ -48,8 +48,7 @@ Route::get('/equipments', "App\Http\Controllers\EquipmentController@list" );
 Route::match(["get", "post"], '/equipments/add', "App\Http\Controllers\EquipmentController@add" );
 Route::match(["get", "post"], '/equipments/edit/{id}', "App\Http\Controllers\EquipmentController@edit" );
 Route::get('/equipments/delete/{id}', "App\Http\Controllers\EquipmentController@delete" );
-
-
+ 
 Route::get('/yachts', "App\Http\Controllers\YachtsController@list" );
 Route::match(["get", "post"], '/yachts/add', "App\Http\Controllers\YachtsController@add" );
 Route::match(["get", "post"], '/yachts/edit/{id}', "App\Http\Controllers\YachtsController@edit" );
@@ -63,7 +62,9 @@ Route::get('/yachts/albums/{id}', "App\Http\Controllers\YachtsController@albums"
 Route::match(["get", "post"], '/yachts/albums/{id}/add', "App\Http\Controllers\YachtsController@album_add" );
 Route::match(["get", "post"], '/yachts/albums/{id}/edit/{aid}', "App\Http\Controllers\YachtsController@album_edit" );
 Route::get('/yachts/albums/{id}/delete/{aid}', "App\Http\Controllers\YachtsController@album_delete" );
- 
+Route::match(["get", "post"], '/yachts/positionconfiguration/{id}', "App\Http\Controllers\YachtsController@positionconfiguration" ); 
+
+
 Route::get('/parameters', "App\Http\Controllers\ParametersController@list" );
 Route::match(["get", "post"], '/parameters/add', "App\Http\Controllers\ParametersController@add" );
 Route::match(["get", "post"], '/parameters/edit/{id}', "App\Http\Controllers\ParametersController@edit" );

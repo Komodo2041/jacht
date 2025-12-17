@@ -12,5 +12,9 @@ class Job extends Model
     public function department() {
         return $this->belongsTo("App\Models\Departments", 'dept_id');
     }
+
+    public function options() {
+        return $this->hasMany("App\Models\ConfPos", "job_id");
+    }
     
 }

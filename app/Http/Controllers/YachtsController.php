@@ -372,5 +372,9 @@ class YachtsController extends Controller
 
     }
 
+    public function positionconfiguration($id, Request $request) {
+echo $id; exit();
+    }
+
 
 }

@@ -56,7 +56,11 @@ class Yachts extends Model
     public function documents()
     {
         return $this->morphMany(Documents::class, 'documentable');
-    }  
+    }
+
+    public function options() {
+        return $this->hasMany("App\Models\ConfPos", "yacht_id");
+    }    
 
 }
 

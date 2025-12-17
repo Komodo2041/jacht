@@ -15,7 +15,7 @@ Na froncie postanowiłem użyć pico.css
  CRUD departamentów  
  ----CRUD stanowisk  
  CRUD kategorie wyposażenia  
- ----CRUD wyposażenie
+ ----CRUD wyposażenie  
  CRUD Typy Dokumentów    
  CRUD jachty  *Filtrowanie*  
  ---- Aktualny Port  
@@ -31,7 +31,7 @@ Na froncie postanowiłem użyć pico.css
   
  
  
-
+ 
 
  Załoga
    -- documents
