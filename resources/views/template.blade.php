@@ -50,7 +50,15 @@
                         <a href="/ports">Porty</a>
                      </li> 
                    </ul>
-                </details>          
+                </details>
+                <details name="menu6">
+                <summary>Załoga</summary>
+                   <ul >
+                     <li>
+                        <a href="/crew">Załoga</a>
+                     </li>                     
+                   </ul>
+                </details>                     
                 <details name="menu3">
                 <summary>Statki</summary>
                    <ul >

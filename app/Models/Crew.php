@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Crew extends Model
 {
+    public $table = "crew";
     public $fillable = [
        "firstname",
        "lastname",
@@ -13,16 +14,17 @@ class Crew extends Model
        "passport_number",
        "notes",
        "country_id",
+       "birthday",
        "job_id",
        "status",
     ]; 
 
     public function country() {
-        $this->belongsTo("App\Models\Nationality", "country_id");
+        return $this->belongsTo("App\Models\Nationality", "country_id");
     }
 
     public function job() {
-        $this->belongsTo("App\Models\Job", "job_id");
+        return $this->belongsTo("App\Models\Job", "job_id");
     }
 
 }
