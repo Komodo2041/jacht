@@ -11,20 +11,22 @@
     <thead>
           <tr>
             <th scope="col">Nazwa</th>
+            <th scope="col">Kraj</th>
             <th scope="col"></th> 
           </tr>
     </thead>
-   <tbody>
+   <tbody> 
     @forelse ($ports as $port)
     <tr>
         <td>{{$port->name}}</td> 
+        <td>{{$port->country?->name}}</td>
         <td> 
             <a href="/ports/edit/{{$port->id}}"><i class="fa-solid fa-pencil"></i></a>
             <a href="/ports/delete/{{$port->id}}" class="delrem"><i class="fa-solid fa-trash-can"></i></a>
         </td> 
     </tr> 
     @empty
-       <tr><td colspan="2">Brak dodanych portów</td></tr>    
+       <tr><td colspan="3">Brak dodanych portów</td></tr>    
     @endforelse     
    </tbody>
 </table>
