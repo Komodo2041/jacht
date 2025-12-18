@@ -84,3 +84,8 @@ Route::get('/{type}/documents/{id}', "App\Http\Controllers\DocumentsController@l
 Route::match(["get", "post"], '/{type}/documents/{id}/add', "App\Http\Controllers\DocumentsController@add" );
 Route::match(["get", "post"], '/{type}/documents/{id}/edit/{did}', "App\Http\Controllers\DocumentsController@edit" );
 Route::get('/{type}/documents/{id}/delete/{aid}', "App\Http\Controllers\DocumentsController@delete" );
+
+Route::get('/nationality', "App\Http\Controllers\NationalityController@list" );
+Route::match(["get", "post"], '/nationality/add', "App\Http\Controllers\NationalityController@add" );
+Route::match(["get", "post"], '/nationality/edit/{id}', "App\Http\Controllers\NationalityController@edit" );
+Route::get('/nationality/delete/{id}', "App\Http\Controllers\NationalityController@delete" );

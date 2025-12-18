@@ -87,7 +87,10 @@
                    <ul >
                      <li>
                         <a href="/documentstypes">Typy Dokumentów</a>
-                     </li>                               
+                     </li>
+                     <li>
+                        <a href="/nationality">Kraje</a>
+                     </li>                                                  
                    </ul>
                 </details>                
                 <hr />

@@ -6,5 +6,6 @@ use Illuminate\Database\Eloquent\Model;
 
 class Nationality extends Model
 {
+    public $table = "nationality"; 
     public $fillable = ["name"];
 }
