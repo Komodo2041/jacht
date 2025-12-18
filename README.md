@@ -30,7 +30,7 @@ Na froncie postanowiłem użyć pico.css
  CRUD Załoga  
  ---- CRUD Dokumenty  
 
-
+załog -> Urlopy? Wynagrodzenia?
  ---- U Aktualny Port
  JACHT <> ZAŁOGA
 

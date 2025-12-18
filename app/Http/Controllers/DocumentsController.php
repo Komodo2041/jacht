@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use App\Models\Documents;
 use App\Models\DocumentsTypes;
 use App\Models\Yachts;
+use App\Models\Crew;
 
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Storage; 
@@ -16,7 +17,7 @@ class DocumentsController extends Controller
 {
 
     private function getParent($type, $id) {
-       if (!in_array($type, ["yachts"])) {
+       if (!in_array($type, ["yachts", "crew"])) {
           return redirect("yachts")->with('error', 'Brak obsługi dokumentów');
        }
 
@@ -24,17 +25,29 @@ class DocumentsController extends Controller
           case "yachts":
             $parent = Yachts::find($id);  
             break;
+         case "crew":
+            $parent = Crew::find($id);  
+            break;            
        }
-
+ 
        if (!$parent) {
-         return redirect("yachts")->with('error', 'Problem z obsługą dokuemntów dla '.$type." id: ".$id);
+            switch ($type) {
+                case "yachts":
+                      return redirect("yachts")->with('error', 'Problem z obsługą dokuemntów dla '.$type." id: ".$id);
+                    break;
+                case "crew":
+                      return redirect("crew")->with('error', 'Problem z obsługą dokuemntów dla '.$type." id: ".$id); 
+                    break;            
+            }
        }
        return $parent;
     }
 
     public function list($type, $id) {
        $parent = $this->getParent($type, $id);
- 
+       if (!$parent) {
+          return redirect("yachts")->with('error', 'Problem z obsługą dokuemntów dla '.$type." id: ".$id);
+       }
        $documents = $parent->documents()->with("type")->get();
        return view("documents/list", ["parent" => $parent, "documents" => $documents, 'type' => $type]);
 
@@ -44,6 +57,9 @@ class DocumentsController extends Controller
         $save =  $request->input('save');
         $document = new Documents();
         $parent = $this->getParent($type, $id);
+       if (!$parent) {
+          return redirect("yachts")->with('error', 'Problem z obsługą dokuemntów dla '.$type." id: ".$id);
+       }        
         $types = DocumentsTypes::all(); 
 
         if ($save) {
@@ -95,6 +111,9 @@ class DocumentsController extends Controller
         $document = Documents::find($fid);
  
         $parent = $this->getParent($type, $id);
+       if (!$parent) {
+          return redirect("yachts")->with('error', 'Problem z obsługą dokuemntów dla '.$type." id: ".$id);
+       }        
         if (!$document) {
             return redirect("/".$type."/documents/".$id)->with('error', 'Nie znaleziono dokumentu');
         }        

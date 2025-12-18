@@ -27,6 +27,7 @@
         <td>{{$person->country?->name}}</td>
         <td>{{$person->status}}</td>
         <td> 
+           <a href="/crew/documents/{{$person->id}}"><i class="fa-solid fa-file-arrow-down" title="Dokumenty"></i></a>
            <a href="/crew/show/{{$person->id}}"><i class="fa-solid fa-list"></i></a>
             <a href="/crew/edit/{{$person->id}}"><i class="fa-solid fa-pencil"></i></a>
             <a href="/crew/delete/{{$person->id}}" class="delrem"><i class="fa-solid fa-trash-can"></i></a>

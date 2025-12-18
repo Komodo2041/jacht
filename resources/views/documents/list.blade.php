@@ -6,8 +6,9 @@
    @if ($type == "yachts")
      <h2>Jacht: {{$parent->name}}</h2>
      <a href="/yachts" class="secondary">Jachty</a> 
-   @else 
-     --##--
+   @elseif ($type == "crew")
+      <h2>Pracownik: {{$parent->firstname}}  {{$parent->lastname}}</h2>
+     <a href="/crew" class="secondary">Załoga</a>
    @endif
    <br/>
    <a href="/{{$type}}/documents/{{$parent->id}}/add" class="secondary">Dodaj nowy dokument</a>

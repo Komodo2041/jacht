@@ -27,6 +27,11 @@ class Crew extends Model
         return $this->belongsTo("App\Models\Job", "job_id");
     }
 
+    public function documents()
+    {
+        return $this->morphMany(Documents::class, 'documentable');
+    }    
+
 }
         
           
