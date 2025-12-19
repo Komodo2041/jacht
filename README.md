@@ -26,12 +26,12 @@ Na froncie postanowiłem użyć pico.css
  -------- CRUD Images  
  ---- CRUD Dokumenty         
  ---- CRUD Konfiguracja stanowisk  (np do rejsu jest wymgany kucharz i kapitan)  
- ---- Pivot - > JACHT <> ZAŁOGA
+ ---- Pivot - > JACHT <> ZAŁOGA  
  CRUD Kraje  
  CRUD Załoga  
  ---- CRUD Dokumenty  
- ---- U Aktualny Port
- ---- Pivot - > ZAŁOGA <> JACHT
+ ---- U Aktualny Port  
+ ---- Pivot - > ZAŁOGA <> JACHT  
 
 
 załog -> Urlopy? Wynagrodzenia?
