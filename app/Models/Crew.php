@@ -17,6 +17,7 @@ class Crew extends Model
        "birthday",
        "job_id",
        "status",
+       "port_id"
     ]; 
 
     public function country() {
@@ -34,7 +35,7 @@ class Crew extends Model
 
     public function port()
     {
-        return $this->hasOnce(CrewPort::class, "port_id");
+        return $this->hasOneThrough(Ports::class, CrewPort::class, "crew_id", "id", "id", "port_id");  
     }
 
 }

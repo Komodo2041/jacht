@@ -95,3 +95,5 @@ Route::match(["get", "post"], '/crew/add', "App\Http\Controllers\CrewController@
 Route::match(["get", "post"], '/crew/edit/{id}', "App\Http\Controllers\CrewController@edit" );
 Route::get('/crew/delete/{id}', "App\Http\Controllers\CrewController@delete" );
 Route::get( '/crew/show/{id}', "App\Http\Controllers\CrewController@show" );
+Route::match(["get", "post"], '/crew/changeport/{id}', "App\Http\Controllers\CrewController@changeport" );
+ 

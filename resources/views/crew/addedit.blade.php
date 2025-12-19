@@ -26,8 +26,21 @@
 
      <label>Data urodzenia</label>
      <input type="date" name="birthday" placeholder="Data" value="{{$person->birthday}}"  > 
+ 
+    @if (!isset($isedit)) 
+    <label>Aktualny port</label>
+    <select name="port_id" >
+          <option value="">-</option>
+            @foreach ($ports as $port)
+                <option value="{{$port->id}}" 
+                   {{ $port->id == $person->port_id ? 'selected' : '' }} 
+                >
+                {{$port->name}}</option>
+            @endforeach
+    </select> 
+    @endif     
 
-     
+
     <label>Notatki</label>
     <textarea name="notes">{{$person->notes}}</textarea>
 

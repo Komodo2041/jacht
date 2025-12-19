@@ -10,11 +10,10 @@
   <table>
     <thead>
           <tr>
-            <th scope="col">Imię i Nazwisko</th>
-            <th scope="col">Email</th>
-            <th scope="col">Stanowisko</th>
-            <th scope="col">Kraj pochodzenia</th>
-            <th scope="col">Status</th> 
+            <th scope="col">Imię i Nazwisko</th>         
+            <th scope="col">Stanowisko</th>   
+            <th scope="col">Status</th>
+            <th scope="col">Port</th> 
             <th scope="col"></th> 
           </tr>
     </thead>
@@ -22,11 +21,11 @@
     @forelse ($crew as $person)
     <tr>
         <td>{{$person->firstname}} {{$person->lastname}}</td> 
-        <td>{{$person->email}}</td> 
-        <td>{{$person->job?->name}}</td>
-        <td>{{$person->country?->name}}</td>
+        <td>{{$person->job?->name}}</td>     
         <td>{{$person->status}}</td>
+        <td>{{$person->port?->name}}  </td>
         <td> 
+          <a href="/crew/changeport/{{$person->id}}"><i class="fa-solid fa-anchor" title="Change Port"></i></a>
            <a href="/crew/documents/{{$person->id}}"><i class="fa-solid fa-file-arrow-down" title="Dokumenty"></i></a>
            <a href="/crew/show/{{$person->id}}"><i class="fa-solid fa-list"></i></a>
             <a href="/crew/edit/{{$person->id}}"><i class="fa-solid fa-pencil"></i></a>

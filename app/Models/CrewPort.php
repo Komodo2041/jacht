@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class CrewPort extends Model
 {
+    public $table = "crewport";
     public $fillable = ["port_id", "crew_id"];
 
     public function crew() {

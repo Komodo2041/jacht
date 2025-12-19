@@ -29,6 +29,7 @@
             @endforeach
     </select> 
 
+    @if (!isset($isedit)) 
     <label>Aktualny port</label>
     <select name="port_id" >
           <option value="">-</option>
@@ -41,8 +42,8 @@
                 {{$port->name}}</option>
             @endforeach
     </select> 
-
-
+    @endif
+ 
     <label>Typ śruby</label> 
     <select name="propeller_type">
         <option value="fixed" 
