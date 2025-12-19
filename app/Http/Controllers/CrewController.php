@@ -11,7 +11,9 @@ use App\Models\Nationality;
 
 use App\Models\CrewPort;
 use App\Models\Ports;
- 
+use App\Models\Yachts; 
+use App\Models\Yachtcrew;
+
 use Illuminate\Support\Facades\Validator;
 
 class CrewController extends Controller
@@ -185,5 +187,51 @@ class CrewController extends Controller
         } else {
             CrewPort::create(["crew_id" => $crew_id, "port_id" => $port_id]);
         } 
-    }     
+    }
+
+    public function changeyacht($id, Request $request) {
+        $save =  $request->input('save');
+        $crew = Crew::find($id);
+        if (!$crew) {
+            return redirect("crew")->with('error', 'Nie znaleziono pracownika');
+        }
+        $isport = 0;
+        
+        if ($crew->port?->id) {
+           $yachts = Yachts::select("yachts.id", "yachts.name")->join("actualport", 'yachts.id', '=', 'actualport.yachts_id')->where("actualport.port_id", $crew->port->id)->get();
+           $isport = 1;
+        } else {
+           $yachts = Yachts::all();
+        }
+        if ($save) {
+ 
+                $validator = Validator::make($request->all(), ['yacht_id' => 'required|integer'], ['yacht_id.required' => "Jacht jest wymagany"]);
+ 
+                if (!$validator->fails()) {
+                    $validated = $validator->validated();
+                    $yacht = Yachts::find($validated['yacht_id']);
+                    if (!$yacht) {
+                        return view("crew/changeyacht", ['errors' => "nie znaleziono jachtu",  'crew' => $crew, 'yachts' => $yachts, 'isport' => $isport]);
+                    }
+                    $actJacht = Yachtcrew::where("crew_id", $crew->id)->first();
+                    if ($actJacht) {
+                        $actJacht->yacht_id = $validated['yacht_id'];
+                        $actJacht->save();
+                    } else {
+                        Yachtcrew::create(["crew_id" => $crew->id, "yacht_id" => $validated['yacht_id']]);
+                    }
+                    if (!$isport) {
+
+                         CrewPort::create(["crew_id" => $crew->id, "port_id" => $yacht->port[0]?->id]);
+                    }   
+                    return redirect("crew")->with('success', 'Jacht został zmieniony!');
+                } else {
+                  return view("crew/changeyacht", ['errors' => implode(", ", $validator->errors()->all()),  'crew' => $crew, 'yachts' => $yachts, 'isport' => $isport]);
+                }
+
+
+        }
+        return view("crew/changeyacht", ['errors' => '', 'crew' => $crew, 'yachts' => $yachts, 'isport' => $isport]);
+    }
+
 }

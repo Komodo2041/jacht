@@ -39,8 +39,8 @@ class Crew extends Model
     }
 
     public function yacht()
-    {
-        return $this->hasOneThrough(Yachts::class, YachtCrew::class, "crew_id", "id", "id", "yacht_id");  
+    { 
+         return $this->hasOneThrough(Yachts::class, YachtCrew::class, "crew_id", "id", "id", "yacht_id");  
     }    
 
 }

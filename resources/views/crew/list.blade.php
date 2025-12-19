@@ -13,7 +13,8 @@
             <th scope="col">Imię i Nazwisko</th>         
             <th scope="col">Stanowisko</th>   
             <th scope="col">Status</th>
-            <th scope="col">Port</th> 
+            <th scope="col">Port</th>
+            <th scope="col">Statek</th>  
             <th scope="col"></th> 
           </tr>
     </thead>
@@ -24,7 +25,15 @@
         <td>{{$person->job?->name}}</td>     
         <td>{{$person->status}}</td>
         <td>{{$person->port?->name}}  </td>
+         <td>
+            @if ($person->yacht?->id)
+               <a href="/yachts/show/{{$person->yacht->id}}">{{$person->yacht->name}}</a>
+            @else
+               -
+            @endif
+         </td>
         <td> 
+         <a href="/crew/changeyacht/{{$person->id}}"><i class="fa-solid fa-ship" title="Set Ship"></i></a>
           <a href="/crew/changeport/{{$person->id}}"><i class="fa-solid fa-anchor" title="Change Port"></i></a>
            <a href="/crew/documents/{{$person->id}}"><i class="fa-solid fa-file-arrow-down" title="Dokumenty"></i></a>
            <a href="/crew/show/{{$person->id}}"><i class="fa-solid fa-list"></i></a>
