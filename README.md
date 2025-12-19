@@ -29,6 +29,7 @@ Na froncie postanowiłem użyć pico.css
  CRUD Kraje  
  CRUD Załoga  
  ---- CRUD Dokumenty  
+ ---- U Aktualny Port
 
 załog -> Urlopy? Wynagrodzenia?
  ---- U Aktualny Port

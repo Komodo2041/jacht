@@ -30,7 +30,12 @@ class Crew extends Model
     public function documents()
     {
         return $this->morphMany(Documents::class, 'documentable');
-    }    
+    } 
+
+    public function port()
+    {
+        return $this->hasOnce(CrewPort::class, "port_id");
+    }
 
 }
         
