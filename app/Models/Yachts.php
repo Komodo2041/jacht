@@ -63,6 +63,10 @@ class Yachts extends Model
         return $this->hasMany("App\Models\ConfPos", "yacht_id");
     }    
 
+    public function crews() {
+        return $this->belongsToMany(Crew::class, YachtCrew::class, "yacht_id", "crew_id");                
+    }
+
 }
 
  

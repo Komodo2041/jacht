@@ -38,6 +38,11 @@ class Crew extends Model
         return $this->hasOneThrough(Ports::class, CrewPort::class, "crew_id", "id", "id", "port_id");  
     }
 
+    public function yacht()
+    {
+        return $this->hasOneThrough(Yachts::class, YachtCrew::class, "crew_id", "id", "id", "yacht_id");  
+    }    
+
 }
         
           
