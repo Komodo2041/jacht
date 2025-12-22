@@ -28,7 +28,7 @@ Na froncie postanowiłem użyć pico.css
  ---- CRUD Konfiguracja stanowisk  (np do rejsu jest wymgany kucharz i kapitan)  
  ---- Pivot - > JACHT <> ZAŁOGA  
  CRUD Kraje  
- CRUD Załoga  
+ CRUD Załoga *Filtrowanie*    
  ---- CRUD Dokumenty  
  ---- U Aktualny Port  
  ---- Pivot - > ZAŁOGA <> JACHT  
