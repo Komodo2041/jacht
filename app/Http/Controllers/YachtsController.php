@@ -18,8 +18,12 @@ use App\Models\Equipment_category;
 use App\Models\YachtEq;
 use App\Models\Albums;
  
+use App\Models\YachtCrew;
+
 use App\Models\Departments;
 use App\Models\ConfPos;
+use App\Models\Crew;
+ 
 
 use Illuminate\Support\Facades\Validator;
 
@@ -378,7 +382,7 @@ class YachtsController extends Controller
     }
 
     public function positionconfiguration($id, Request $request) {
-       $yacht = Yachts::find($id);;
+       $yacht = Yachts::find($id);
        if (!$yacht) {
             return redirect("yachts")->with('error', 'Nie znaleziono jachtu');  
        }    
@@ -424,6 +428,56 @@ class YachtsController extends Controller
        return view("yachts/configpos", ['errors' => '', 'dept' => $dept, 'yacht' => $yacht, 'currentValues' => $current ]);
     }
 
+    public function crew($id, Request $request) {
+       $yacht = Yachts::find($id);;
+       if (!$yacht) {
+            return redirect("yachts")->with('error', 'Nie znaleziono jachtu');  
+       }
+       $portId = $yacht->port[0]->id;
+       if (!$portId) {
+           return redirect("yachts/changeport/".$id)->with('error', 'Proszę najpierw ustaw port!');  
+       }
  
+       $crewsports = Crew::select("crew.id", "crew.firstname", "crew.lastname", "crew.status")->join("crewport", 'crew.id', '=', 'crewport.crew_id')->where("crewport.port_id", $portId)->get();
+       $selectcrew = $yacht->crews()->pluck("crew_id", "crew_id")->toArray();
+       
+       $save =  $request->input('save');
+       if ($save) {
+            
+                $validator = Validator::make($request->all(), 
+                    [
+                        'crew.*' => 'nullable|integer', 
+                    ],
+                );
+                if ($validator->fails()) {
+                    $validated = $validator->errors()->all();
+                    return view("yachts/crew", ['errors' => implode(", ", $validated),  'yacht' => $yacht, 'crews' => $crewsports, 'selected_crew' =>  $selectcrew ]);
+                } else {
+                    $validated = $validator->validated();
+ 
+                    YachtCrew::where("yacht_id", $id)->delete();
+                    if (isset($validated['crew'])) {
+                        foreach ($validated['crew'] as $key => $val) {
+                            if ($key && isset($selectcrew[$key])) {
+                            
+                                YachtCrew::create([
+                                "yacht_id" => $id,
+                                "crew_id" => $key, 
+                                ]);
+                            }
+                        }  
+                    }
+                    
+                    return redirect("yachts")->with('success', 'Zmieniono załogę dla jachtu '.$yacht->name);
+                } 
+
+        }
+             
+
+       return view("yachts/crew", ['errors' => '',  'yacht' => $yacht, 'crews' => $crewsports, 'selected_crew' =>  $selectcrew ]);
+
+
+    }
+
 
 }

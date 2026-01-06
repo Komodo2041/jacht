@@ -34,6 +34,8 @@
          </td> 
         <td> 
 
+            <a href="/yachts/crew/{{$yacht->id}}"><i class="fa-solid fa-users" title="Załoga"></i></a>
+
             <a href="/yachts/positionconfiguration/{{$yacht->id}}"><i class="fa-solid fa-bars-progress" title="Stanowiska - konfiguracje "></i></a>
 
             <a href="/yachts/documents/{{$yacht->id}}"><i class="fa-solid fa-file-arrow-down" title="Dokumenty"></i></a>

@@ -63,6 +63,7 @@ Route::match(["get", "post"], '/yachts/albums/{id}/add', "App\Http\Controllers\Y
 Route::match(["get", "post"], '/yachts/albums/{id}/edit/{aid}', "App\Http\Controllers\YachtsController@album_edit" );
 Route::get('/yachts/albums/{id}/delete/{aid}', "App\Http\Controllers\YachtsController@album_delete" );
 Route::match(["get", "post"], '/yachts/positionconfiguration/{id}', "App\Http\Controllers\YachtsController@positionconfiguration" ); 
+Route::match(["get", "post"], '/yachts/crew/{id}', "App\Http\Controllers\YachtsController@crew" ); 
 
 
 Route::get('/parameters', "App\Http\Controllers\ParametersController@list" );
