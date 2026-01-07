@@ -45,7 +45,10 @@
                 </details>
                 <details name="menu2">
                 <summary>Rejsy</summary>
-                   <ul  >
+                   <ul>
+                     <li>
+                        <a href="/cruises">Rejsy</a>
+                     </li> 
                      <li>
                         <a href="/ports">Porty</a>
                      </li> 
