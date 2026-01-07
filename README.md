@@ -32,6 +32,12 @@ Na froncie postanowiłem użyć pico.css
  ---- CRUD Dokumenty  
  ---- U Aktualny Port  
  ---- Pivot - > ZAŁOGA <> JACHT  
+ CRUD Rejsy
+ ---- CRUD Albums   
+ -------- CRUD Images  
+
+
+
 
 
 załog -> Urlopy? Wynagrodzenia?
