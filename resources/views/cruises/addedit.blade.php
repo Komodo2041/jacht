@@ -12,15 +12,18 @@
 
 <form action="" method="Post">
      @csrf
-     <label>Rejs</label>
-     <input type="text" name="name" placeholder="Nazwa" value="{{$type->name}}"  >
  
      <label>Jacht</label>
       @foreach ($yachts AS $yacht)
+         <input type="radio" name="yacht_id" value="{{$yacht->id}}" 
+          @if ($yacht->id == $cr->yacht_id) checked @endif
+         /> {{$yacht->name}} ({{$yacht->port[0]->name}})<br/>
       @endforeach
+     <br/>
 
      <label>Port Startu</label>
      <select name="port_start_id">
+        <option value="">-</option> 
         @foreach ($ports AS $port)
            <option value="{{$port->id}}"
             @if ($cr->port_start_id == $port->id) selected @endif
@@ -30,6 +33,7 @@
 
      <label>Port Końcowy</label>
      <select name="port_end_id">
+         <option value="">-</option> 
         @foreach ($ports AS $port)
            <option value="{{$port->id}}"
             @if ($cr->port_end_id == $port->id) selected @endif
@@ -46,9 +50,9 @@
 
      <input type="hidden" value="1" name="save" />
      @if (isset($isedit) && $isedit)
-         <input type="submit" value="Edytuj typ dokumentu" />
+         <input type="submit" value="Edytuj rejs" />
      @else
-         <input type="submit" value="Dodaj nowy typ dokumentu" />
+         <input type="submit" value="Dodaj nowy rejs" />
      @endif
      
     

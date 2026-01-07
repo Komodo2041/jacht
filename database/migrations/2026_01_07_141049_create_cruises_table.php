@@ -17,7 +17,7 @@ return new class extends Migration
             $table->date("date_from");
             $table->date("date_to");
             $table->integer("port_start_id");
-            $table->date("port_end_id");
+            $table->integer("port_end_id");
             $table->timestamps();
 
             $table->foreign("yacht_id")->references("id")->on("yachts");

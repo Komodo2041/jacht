@@ -22,7 +22,7 @@ class Cruises extends Model
     }   
     
     public function yacht() {
-        return $this->belongsTo("App\Models\Yacht", "yacht_id");
+        return $this->belongsTo("App\Models\Yachts", "yacht_id");
     }  
     
 }
