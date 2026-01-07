@@ -67,6 +67,10 @@ class Yachts extends Model
         return $this->belongsToMany(Crew::class, YachtCrew::class, "yacht_id", "crew_id");                
     }
 
+    public function cruises() {
+        return $this->hasMany(Cruises::class, "yacht_id");                
+    }
+
 }
 
  
