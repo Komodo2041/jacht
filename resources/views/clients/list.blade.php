@@ -22,7 +22,7 @@
         <td>{{$c->email}} </td>
         <td>{{$c->phone}} </td>
         <td> 
-    
+            <a href="/clients/documents/{{$c->id}}"><i class="fa-solid fa-file-arrow-down" title="Dokumenty"></i></a>
             <a href="/clients/edit/{{$c->id}}"><i class="fa-solid fa-pencil"></i></a>
             <a href="/clients/delete/{{$c->id}}" class="delrem"><i class="fa-solid fa-trash-can"></i></a>
         </td> 

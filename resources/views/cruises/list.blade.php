@@ -27,9 +27,8 @@
         <td>{{$cr->date_to}}</td>
          <td>{{$cr->portstart->name}} - {{$cr->portend->name}}</td>
         <td> 
-                <a href="/cruises/documents/{{$cr->id}}"><i class="fa-solid fa-file-arrow-down" title="Dokumenty"></i></a>
-
-
+            <a href="/cruises/documents/{{$cr->id}}"><i class="fa-solid fa-file-arrow-down" title="Dokumenty"></i></a>      
+ 
             <a href="/cruises/albums/{{$cr->id}}"><i class="fa-solid fa-camera" title="Zdjęcia"></i></a>
             <a href="/cruises/edit/{{$cr->id}}"><i class="fa-solid fa-pencil"></i></a>
             <a href="/cruises/delete/{{$cr->id}}" class="delrem"><i class="fa-solid fa-trash-can"></i></a>

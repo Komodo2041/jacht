@@ -10,6 +10,7 @@ use App\Models\DocumentsTypes;
 use App\Models\Yachts;
 use App\Models\Crew;
 use App\Models\Cruises;
+use App\Models\Clients;
 
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Storage; 
@@ -18,7 +19,7 @@ class DocumentsController extends Controller
 {
 
     private function getParent($type, $id) {
-       if (!in_array($type, ["yachts", "crew", "cruises"])) {
+       if (!in_array($type, ["yachts", "crew", "cruises", "clients"])) {
           return redirect("yachts")->with('error', 'Brak obsługi dokumentów');
        }
 
@@ -31,7 +32,10 @@ class DocumentsController extends Controller
             break;   
          case "crew":
             $parent = Crew::find($id);  
-            break;            
+            break;
+         case "clients":
+            $parent = Clients::find($id);  
+            break;                 
        }
  
        if (!$parent) {
@@ -44,14 +48,22 @@ class DocumentsController extends Controller
                     break;   
                 case "cruises":
                       return redirect("cruises")->with('error', 'Problem z obsługą dokuemntów dla '.$type." id: ".$id); 
-                    break;                               
+                    break;
+                case "clients":
+                    
+                      return redirect("clients")->with('error', 'Problem z obsługą dokuemntów dla '.$type." id: ".$id); 
+                    break;                                                 
             }
        }
+      
        return $parent;
     }
 
     public function list($type, $id) {
        $parent = $this->getParent($type, $id);
+       if ($parent instanceof \Illuminate\Http\RedirectResponse) {
+            return $parent;
+        }      
        if (!$parent) {
           return redirect("yachts")->with('error', 'Problem z obsługą dokuemntów dla '.$type." id: ".$id);
        }
