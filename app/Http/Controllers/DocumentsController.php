@@ -9,6 +9,7 @@ use App\Models\Documents;
 use App\Models\DocumentsTypes;
 use App\Models\Yachts;
 use App\Models\Crew;
+use App\Models\Cruises;
 
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Storage; 
@@ -17,7 +18,7 @@ class DocumentsController extends Controller
 {
 
     private function getParent($type, $id) {
-       if (!in_array($type, ["yachts", "crew"])) {
+       if (!in_array($type, ["yachts", "crew", "cruises"])) {
           return redirect("yachts")->with('error', 'Brak obsługi dokumentów');
        }
 
@@ -25,6 +26,9 @@ class DocumentsController extends Controller
           case "yachts":
             $parent = Yachts::find($id);  
             break;
+          case "cruises":
+            $parent = Cruises::find($id);  
+            break;   
          case "crew":
             $parent = Crew::find($id);  
             break;            
@@ -37,7 +41,10 @@ class DocumentsController extends Controller
                     break;
                 case "crew":
                       return redirect("crew")->with('error', 'Problem z obsługą dokuemntów dla '.$type." id: ".$id); 
-                    break;            
+                    break;   
+                case "cruises":
+                      return redirect("cruises")->with('error', 'Problem z obsługą dokuemntów dla '.$type." id: ".$id); 
+                    break;                               
             }
        }
        return $parent;
