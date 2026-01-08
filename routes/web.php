@@ -109,6 +109,6 @@ Route::match(["get", "post"], '/cruises/albums/{id}/edit/{aid}', "App\Http\Contr
 Route::get('/cruises/albums/{id}/delete/{aid}', "App\Http\Controllers\CruisesController@album_delete" );
 
 Route::get('/clients', "App\Http\Controllers\ClientsController@list" );
-Route::match(["get", "post"], '/clients/add', "App\Http\Controllers\ClientsControlle@add" );
-Route::match(["get", "post"], '/clients/edit/{id}', "App\Http\Controllers\ClientsControlle@edit" );
-Route::get('/clients/delete/{id}', "App\Http\Controllers\ClientsControlle@delete" );
+Route::match(["get", "post"], '/clients/add', "App\Http\Controllers\ClientsController@add" );
+Route::match(["get", "post"], '/clients/edit/{id}', "App\Http\Controllers\ClientsController@edit" );
+Route::get('/clients/delete/{id}', "App\Http\Controllers\ClientsController@delete" );
