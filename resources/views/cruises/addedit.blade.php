@@ -13,6 +13,12 @@
 <form action="" method="Post">
      @csrf
  
+    <label>Nazwa</label>
+    <input type="text" name="name" value="{{$cr->name}}" />
+
+    <label>Opis</label>
+    <textarea name="body">{{$cr->body}}</textarea>
+
      <label>Jacht</label>
       @foreach ($yachts AS $yacht)
          <input type="radio" name="yacht_id" value="{{$yacht->id}}" 

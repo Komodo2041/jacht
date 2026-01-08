@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class Cruises extends Model
 {
     public $table = "cruises";
-    public $fillable = ["yacht_id", "date_from", "date_to", "port_start_id", "port_end_id"  ];
+    public $fillable = ["yacht_id", "date_from", "date_to", "port_start_id", "port_end_id", "name", "body", "status" ];
 
     public function crew() {
         return $this->belongsTo("App\Models\Crew", "crew_id");

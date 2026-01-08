@@ -11,7 +11,7 @@
     <thead>
           <tr>
             <th scope="col">Jacht</th> 
-            <th scope="col">Liczba kabin</th> 
+            <th scope="col">Nazwa</th> 
             <th scope="col">Start</th> 
             <th scope="col">Koniec</th> 
             <th scope="col">Porty</th> 
@@ -21,8 +21,8 @@
    <tbody>
     @forelse ($cruises as $cr)
     <tr>
-        <td>{{$cr->yacht->name}}</td>
-        <td>{{$cr->yacht->cabins }}</td>
+        <td>{{$cr->yacht->name}} | {{$cr->yacht->cabins * 2}}</td>
+        <td>{{$cr->name}}</td>
         <td>{{$cr->date_from}}</td>
         <td>{{$cr->date_to}}</td>
          <td>{{$cr->portstart->name}} - {{$cr->portend->name}}</td>

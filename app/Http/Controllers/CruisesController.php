@@ -34,6 +34,8 @@ class CruisesController extends Controller
              'port_end_id' => 'required|integer',
              'date_from' => 'required|date',
              'date_to' => 'required|date|after:date_from',
+             'name' => 'required|string',
+             'body' => 'required|string',
           ],
           [
              'yacht_id.required' => "Jacht jest wymagany",
@@ -41,7 +43,9 @@ class CruisesController extends Controller
              'port_end_id.required' => "port końcowy jest wymagany",
              'date_from.required' => "data startu jest wymagana",
              'date_to.required' => "data końca jest wymagana",
-             'date_to.after' => "data do musi być większa niż data od"
+             'date_to.after' => "data do musi być większa niż data od",
+             'name.required' => "Pole nazwa jest wymagane",
+             'body.required' => "Opis jest wymagany",
           ]  
           );
  
@@ -90,6 +94,8 @@ class CruisesController extends Controller
              'port_end_id' => 'required|integer',
              'date_from' => 'required|date',
              'date_to' => 'required|date|after:date_from',
+             'name' => 'required|string',
+             'body' => 'required|string',             
           ],
           [
              'yacht_id.required' => "Jacht jest wymagany",
@@ -97,7 +103,9 @@ class CruisesController extends Controller
              'port_end_id.required' => "port końcowy jest wymagany",
              'date_from.required' => "data startu jest wymagana",
              'date_to.required' => "data końca jest wymagana",
-             'date_to.after' => "data do musi być większa niż data od"
+             'date_to.after' => "data do musi być większa niż data od",
+             'name.required' => "Pole nazwa jest wymagane",
+             'body.required' => "Opis jest wymagany",             
           ]  
           );
  
@@ -120,7 +128,7 @@ class CruisesController extends Controller
                return view("cruises/addedit", ['errors' => implode(", ", $validated), 'cr' => $cr, 'ports' => $ports, 'yachts' => $yachts, 'isedit' => true]);
          } else {
             $validated = $validator->validated();
-            Cruises::create($validated);
+            $cr->update($validated);
             return redirect("cruises")->with('success', 'Rejs został dodany pomyślnie!');  
          } 
  
