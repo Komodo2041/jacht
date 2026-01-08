@@ -107,3 +107,8 @@ Route::get('/cruises/albums/{id}', "App\Http\Controllers\CruisesController@album
 Route::match(["get", "post"], '/cruises/albums/{id}/add', "App\Http\Controllers\CruisesController@album_add" );
 Route::match(["get", "post"], '/cruises/albums/{id}/edit/{aid}', "App\Http\Controllers\CruisesController@album_edit" );
 Route::get('/cruises/albums/{id}/delete/{aid}', "App\Http\Controllers\CruisesController@album_delete" );
+
+Route::get('/clients', "App\Http\Controllers\ClientsController@list" );
+Route::match(["get", "post"], '/clients/add', "App\Http\Controllers\ClientsControlle@add" );
+Route::match(["get", "post"], '/clients/edit/{id}', "App\Http\Controllers\ClientsControlle@edit" );
+Route::get('/clients/delete/{id}', "App\Http\Controllers\ClientsControlle@delete" );

@@ -36,6 +36,8 @@ Na froncie postanowiłem użyć pico.css
  ---- CRUD Albums   
  -------- CRUD Images  
  ---- CRUD Dokumenty   
+ CRUD klienci  
+ ---- CRUD Dokumenty   
 
 
 

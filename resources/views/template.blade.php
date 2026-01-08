@@ -82,15 +82,20 @@
                      </li>                     
                    </ul>
                 </details>
+                <details name="menu6">
+                <summary>Klienci </summary>
+                   <ul >
+                     <li>
+                        <a href="/clients">Klienci</a>
+                     </li>                     
+                   </ul>
+                </details>                    
                 <details name="menu4">
                 <summary>Producenci statków</summary>
                    <ul >
                      <li>
                         <a href="/producer">Producenci</a>
-                     </li>
-                     <li>
-                        <a href="/models">Modele [Nie działa]</a>
-                     </li>                                 
+                     </li>                               
                    </ul>
                 </details>
                 <details name="menu5">
