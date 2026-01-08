@@ -15,7 +15,7 @@ class CruisesController extends Controller
 {
 
     public function list() {
-       $cruises = Cruises::all(); 
+       $cruises = Cruises::with(["portstart", "portend", "yacht"])->get(); 
        return view("cruises/list", ["cruises" => $cruises]);
     }
 
@@ -60,6 +60,27 @@ class CruisesController extends Controller
                     $validator->errors()->add('yacht_id', 'Wybrany jacht nie znajduje się obecnie w porcie startowym.');
                 }
             }
+
+            $date_from = $request->input('date_from');
+            $date_to = $request->input('date_to');    
+            
+            $calc = Cruises::select('cruises.id')
+                     ->where('cruises.yacht_id', $yachtId)
+                     ->where(function ($query) use ($date_from, $date_to) {
+                        $query->where(function ($q) use ($date_from) {
+                              $q->where('cruises.date_from', '<', $date_from)
+                              ->where('cruises.date_to', '>', $date_from);
+                        })->orWhere(function ($q) use ($date_to) {
+                              $q->where('cruises.date_from', '<', $date_to)
+                              ->where('cruises.date_to', '>', $date_to);
+                        });
+                     })->count();
+
+            if ($calc) {
+                $validator->errors()->add('yacht_id', 'Podany Jacht ma w tym okresie planowany rejs');
+            }
+
+ 
         });
 
          if ($validator->fails()) {
@@ -120,6 +141,26 @@ class CruisesController extends Controller
                     $validator->errors()->add('yacht_id', 'Wybrany jacht nie znajduje się obecnie w porcie startowym.');
                 }
             }
+
+            $date_from = $request->input('date_from');
+            $date_to = $request->input('date_to');    
+            
+            $calc = Cruises::select('cruises.id')
+                     ->where('cruises.yacht_id', $yachtId)
+                     ->where(function ($query) use ($date_from, $date_to) {
+                        $query->where(function ($q) use ($date_from) {
+                              $q->where('cruises.date_from', '<', $date_from)
+                              ->where('cruises.date_to', '>', $date_from);
+                        })->orWhere(function ($q) use ($date_to) {
+                              $q->where('cruises.date_from', '<', $date_to)
+                              ->where('cruises.date_to', '>', $date_to);
+                        });
+                     })->count();
+
+            if ($calc) {
+                $validator->errors()->add('yacht_id', 'Podany Jacht ma w tym okresie planowany rejs');
+            }
+
         });
 
          if ($validator->fails()) {
