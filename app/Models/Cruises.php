@@ -24,5 +24,15 @@ class Cruises extends Model
     public function yacht() {
         return $this->belongsTo("App\Models\Yachts", "yacht_id");
     }  
+
+    public function albums()
+    {
+        return $this->morphMany(Albums::class, 'albumable');
+    }    
+
+    public function documents()
+    {
+        return $this->morphMany(Documents::class, 'documentable');
+    }    
     
 }

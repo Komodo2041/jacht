@@ -42,7 +42,7 @@ Na froncie postanowiłem użyć pico.css
 
 
 załog -> Urlopy? Wynagrodzenia?
- CRID rejsy
+ 
   
  
  

@@ -8,8 +8,8 @@
    
    @if ($album->albumable_type == "App\Models\Yachts")
      <a href="/yachts" class="secondary">Jachty</a> {{$album->albumable->name}}
-   @else 
-     --##--
+   @elseif ($album->albumable_type == "App\Models\Cruises")
+     <a href="/cruises" class="secondary">Rejsy</a> {{$album->albumable->name}}
    @endif
    <br/>
    <a href="/albums/{{$album->id}}/add" class="secondary">Dodaj nowe zdjęcie</a>

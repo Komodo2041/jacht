@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use App\Models\Cruises;
 use App\Models\Ports; 
 use App\Models\Yachts;
+use App\Models\Albums;
 
 use Illuminate\Support\Facades\Validator;
 
@@ -186,5 +187,96 @@ class CruisesController extends Controller
         return redirect("cruises")->with('error', 'Nie znaleziono rejsu');
     }   
 
+
+    public function albums($id) {
+        $cr = Cruises::find($id);
+      
+        if ($cr) {
+            $albums = $cr->albums()->get();
+      
+            return view("cruises/albums/list", ["cr" => $cr, 'albums' => $albums]);
+        }
+        return redirect("cruises")->with('error', 'Nie znaleziono statku');  
+    }
+
+    public function album_add($id, Request $request) {
+       $save =  $request->input('save');
+       $album = new Albums();
+       $cr = Cruises::find($id);
+       if ($cr) {
+            if ($save) { 
+                $validator = Validator::make($request->all(), 
+                    [
+                        'name' => 'required|string|max:100',
+                    ],
+                    [
+                        'name.required' => "Pole Nazwa jest wymagane",
+                        'name.max' => "Pole Nazwa jest za długie",
+                    ]
+                );
+        
+                if ($validator->fails()) {
+                    $validated = $validator->errors()->all();
+                    $album = new Albums($request->all());
+                    return view("cruises/albums/addedit", ['errors' => implode(", ", $validated), 'album' => $album]);
+                } else {
+                    $validated = $validator->validated();
+                    $cr->albums()->create($request->all());
+                    return redirect("cruises/albums/".$cr->id)->with('success', 'Album został dodany pomyślnie!');
+                } 
+            }
+            return view("cruises/albums/addedit", ['errors' => '', 'album' => $album]);
+       }
+       return redirect("cruises")->with('error', 'Nie znaleziono rejsu');  
+    }
+
+    public function album_edit($id, $aid, Request $request) {
+       $save =  $request->input('save');
+       $album = Albums::find($aid);
+       if (!$album) {
+            return redirect("cruises")->with('error', 'Nie znaleziono albumu');  
+       }
+       $cr = Cruises::find($id);
+       if ($cr) {
+            if ($save) { 
+                $validator = Validator::make($request->all(), 
+                    [
+                        'name' => 'required|string|max:100',
+                    ],
+                    [
+                        'name.required' => "Pole Nazwa jest wymagane",
+                        'name.max' => "Pole Nazwa jest za długie",
+                    ]
+                );
+        
+                if ($validator->fails()) {
+                    $validated = $validator->errors()->all();
+                    $album = new Albums($request->all());
+                    return view("cruises/albums/addedit", ['errors' => implode(", ", $validated), 'album' => $album, 'isedit' => true]);
+                } else {
+                    $validated = $validator->validated();
+                    $album->update($request->all());
+                    return redirect("cruises/albums/".$cr->id)->with('success', 'Album został edytowany pomyślnie!');
+                } 
+            }
+            return view("cruises/albums/addedit", ['errors' => '', 'album' => $album, 'isedit' => true]);
+       }
+       return redirect("cruises")->with('error', 'Nie znaleziono rejsu');  
+ 
+    }
+ 
+    public function album_delete($id, $aid) {
+       $album = Albums::find($aid);
+       if (!$album) {
+            return redirect("cruises")->with('error', 'Nie znaleziono albumu');  
+       }
+       $cr =  Cruises::find($id);
+       if ($cr) {
+           $album->delete();
+           return redirect("cruises/albums/".$cr->id)->with('success', 'Album został usunięty');
+       }
+       return redirect("cruises")->with('error', 'Nie znaleziono statku'); 
+
+    }
 
 }
