@@ -99,10 +99,18 @@ class ClientsController extends Controller
                     'course_id' => 'required|max:100',
                     'payment' => 'required|integer', 
               ]);
-
+ 
                $validator->after(function ($validator) use ($request, $used) {
                      $course_id = $request->input('course_id');   
                   
+                     $cr = Cruises::find($course_id);
+                     $nrplace = $cr->yacht->cabins * 2;
+                     $actplace = ClientCourses::where("course_id", $course_id)->count();
+                    
+                     if ($actplace + 1 >  $nrplace) {
+                        $validator->errors()->add('course_id', 'Wybrany rejs ma już maks miejsc');
+                     }
+
                      if (isset($used[$course_id])) {   
                         $validator->errors()->add('course_id', 'Wybrany rejs już został dodany');
                      } 
