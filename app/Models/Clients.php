@@ -14,4 +14,8 @@ class Clients extends Model
         return $this->morphMany(Documents::class, 'documentable');
     }    
 
+    public function cuirses() {
+        return $this->belongsToMany(ClientCourses::class, Cruises::class, "client_id", "course_id")->withPivot('payment');  
+    }
+
 }
