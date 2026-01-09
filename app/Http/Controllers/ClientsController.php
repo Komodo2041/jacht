@@ -124,4 +124,14 @@ class ClientsController extends Controller
          return view("clients/cruises", ['client' => $client, 'errors' => "", "cruises" => $cruises, "allcruises" => $allcruises ]);
     }
 
+    public function cruises_delete($id, $cid) {
+        $client = Clients::find($id);
+        if ($client) {
+            ClientCourses::where("client_id", $id)->where("course_id", $cid)->delete();
+            return redirect("clients/cruises/".$id)->with('success', 'Rejs został usunięty');
+        } 
+        return redirect("clients")->with('error', 'Nie znaleziono klienta');
+
+    }
+
 }

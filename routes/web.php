@@ -114,3 +114,4 @@ Route::match(["get", "post"], '/clients/edit/{id}', "App\Http\Controllers\Client
 Route::get('/clients/delete/{id}', "App\Http\Controllers\ClientsController@delete" );
 
 Route::match(["get", "post"], '/clients/cruises/{id}', "App\Http\Controllers\ClientsController@cruises" ); 
+Route::get('/clients/cruises/{id}/delete/{cid}', "App\Http\Controllers\ClientsController@cruises_delete" );
