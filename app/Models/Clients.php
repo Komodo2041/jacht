@@ -15,7 +15,7 @@ class Clients extends Model
     }    
 
     public function cuirses() {
-        return $this->belongsToMany(ClientCourses::class, Cruises::class, "client_id", "course_id")->withPivot('payment');  
+        return $this->belongsToMany(Cruises::class, ClientCourses::class, "client_id", "course_id")->withPivot('payment');  
     }
 
 }

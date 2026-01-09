@@ -38,7 +38,7 @@ Na froncie postanowiłem użyć pico.css
  ---- CRUD Dokumenty   
  CRUD Klienci  
  ---- CRUD Dokumenty   
-
+ ---- Pivot klienci <> rejs  
 
 
 Pivot klienci <> rejs

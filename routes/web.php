@@ -112,3 +112,5 @@ Route::get('/clients', "App\Http\Controllers\ClientsController@list" );
 Route::match(["get", "post"], '/clients/add', "App\Http\Controllers\ClientsController@add" );
 Route::match(["get", "post"], '/clients/edit/{id}', "App\Http\Controllers\ClientsController@edit" );
 Route::get('/clients/delete/{id}', "App\Http\Controllers\ClientsController@delete" );
+
+Route::match(["get", "post"], '/clients/cruises/{id}', "App\Http\Controllers\ClientsController@cruises" ); 
