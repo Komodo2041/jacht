@@ -36,12 +36,13 @@ Na froncie postanowiłem użyć pico.css
  ---- CRUD Albums   
  -------- CRUD Images  
  ---- CRUD Dokumenty   
+ ---- Pivot rejs <> kleinci  
  CRUD Klienci  
  ---- CRUD Dokumenty   
- ---- Pivot klienci <> rejs  
+ ---- Pivot klienci <> rejs   
 
 
-Pivot klienci <> rejs
+ 
 rejs zmiana statusu
 
 załog -> Urlopy? Wynagrodzenia?
