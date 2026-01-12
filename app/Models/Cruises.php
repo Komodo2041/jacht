@@ -34,5 +34,9 @@ class Cruises extends Model
     {
         return $this->morphMany(Documents::class, 'documentable');
     }    
+
+    public function clients() {
+        return $this->belongsToMany(Clients::class, ClientCourses::class, "course_id",  "client_id")->withPivot('payment');  
+    }
     
 }

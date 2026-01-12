@@ -9,6 +9,9 @@ use App\Models\Cruises;
 use App\Models\Ports; 
 use App\Models\Yachts;
 use App\Models\Albums;
+use App\Models\Clients;
+use App\Models\ClientCourses;
+
 
 use Illuminate\Support\Facades\Validator;
 
@@ -275,8 +278,30 @@ class CruisesController extends Controller
            $album->delete();
            return redirect("cruises/albums/".$cr->id)->with('success', 'Album został usunięty');
        }
-       return redirect("cruises")->with('error', 'Nie znaleziono statku'); 
+       return redirect("cruises")->with('error', 'Nie znaleziono rejsu'); 
+    }
+
+
+    
+
+    public function clients($id, Request $request) {
+       $cr = Cruises::find($id);
+       if (!$cr) {
+            return redirect("cruises")->with('error', 'Nie znaleziono rejsu'); 
+       }
+       $clients = $cr->clients()->get();
+       return view("cruises/clients", ['errors' => '', 'clients' => $clients, 'cr' => $cr]);
+    }
+
+    public function cruises_delete($id, $cid) {
+        $cr = Cruises::find($id);
+        if ($cr) {
+            ClientCourses::where("client_id", $cid)->where("course_id", $id)->delete();
+            return redirect("cruises/clients/".$id)->with('success', 'Klient został usunięty usunięty z rejsu');
+        } 
+        return redirect("cruises")->with('error', 'Nie znaleziono rejsu');
 
     }
+
 
 }
