@@ -1,3 +1,46 @@
+# YachtFleet Manager - System Zarządzania Flotą i Rejsami Turystycznymi
+
+YachtFleet Manager to zaawansowany system typu ERP/CRM stworzony w celu automatyzacji i koordynacji operacji w firmach zajmujących się czarterem oraz organizacją turystycznych rejsów jachtowych. Aplikacja zarządza zasobami floty, uprawnieniami załogi, logistyką portową oraz procesem rezerwacji dla klientów.
+
+## 🚀 Kluczowe Moduły i Funkcjonalności
+
+- **Zarządzanie Flotą (Yacht CRUD & Logistics):** Pełna ewidencja jachtów, parametrów technicznych, przypisanego wyposażenia oraz historii relokacji między portami.
+- **System Rezerwacji i Rejsów (Voyage Management):** Planowanie kursów, przypisywanie klientów do rejsów (relacje Many-to-Many) oraz zarządzanie statusami rejsów na żywo.
+- **Zarządzanie Załogą (Crew & HR Hub):** Ewidencja członków załogi, weryfikacja ważności dokumentów i uprawnień morskich oraz algorytm konfiguracji wymaganych stanowisk na dany rejs (np. wymagany kapitan + kucharz).
+- **Logistyka i Magazyn:** Monitorowanie aktualnego położenia jednostek (Porty), kategoryzacja wyposażenia oraz zaawansowany system tagowania producentów do szybkiego filtrowania zasobów.
+
+## 🛠️ Stack Technologiczny
+
+- **Backend:** PHP 8.x, Laravel Framework
+- **Frontend:** Livewire (Reactive UI), Blade, Pico.css (Lightweight CSS Framework)
+- **Baza danych:** MySQL / PostgreSQL (zaawansowane tabele pivot, relacje polimorficzne do obsługi albumów zdjęć/dokumentów)
+
+## 🐳 Architektura i Dobre Praktyki (Do wdrożenia)
+
+- **Architektura:** Wykorzystanie Form Requests do walidacji, Service Pattern do izolacji logiki biznesowej.
+- **Optymalizacja:** Zapytania Eloquent zoptymalizowane pod kątem problemu N+1 (Eager Loading).
+- **Środowisko:** Pełna konteneryzacja za pomocą Dockera (Laravel Sail).
+
+## 💻 Instalacja i Uruchomienie
+
+1. Sklonuj repozytorium:
+   ```bash
+   git clone https://github.com
+   cd jacht
+   ```
+2. Skopiuj plik środowiskowy i zainstaluj zależności:
+   ```bash
+   cp .env.example .env
+   composer install
+   npm install && npm run dev
+   ```
+3. Wygeneruj klucz aplikacji i uruchom migracje wraz z testowymi danymi (Seeders):
+   ```bash
+   php artisan key:generate
+   php artisan migrate --seed
+   ``` 
+ 
+ 
  Tutaj będzie projekt Laravel korzystający z LiveWire mający za zadania pomóc
  obsłudze firmy zajmującej się podróżami jachtami dla turystów
  Duże moduły: Statki, Kursy, Załoga, miejsca na statku
