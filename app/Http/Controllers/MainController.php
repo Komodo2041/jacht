@@ -8,7 +8,8 @@ use Illuminate\Http\Request;
 class MainController extends Controller
 {
     //
-    public function page() {
+    public function page()
+    {
         return view("main", []);
     }
 }
